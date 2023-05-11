@@ -24,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SngFormComponent } from './pages/sng-form/sng-form.component';
 import { SnhFormComponent } from './pages/snh-form/snh-form.component';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { SnhFormComponent } from './pages/snh-form/snh-form.component';
     MatInputModule,
     MatListModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
