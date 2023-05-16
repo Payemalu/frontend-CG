@@ -9,6 +9,8 @@ import { DuctoService } from 'src/app/services/ducto.service';
   styleUrls: ['./sng.component.scss']
 })
 export class SngComponent implements OnInit {
+
+  step = 0;
   
   listDucts: Ducto[] = [];
 
@@ -58,6 +60,18 @@ export class SngComponent implements OnInit {
   //   this.tabla1.renderRows();
   //   this.articuloselect = new Articulo("", "", "");
   // }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
 }
 
 

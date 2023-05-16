@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 import { MatTable } from '@angular/material/table';
 
 @Component({
@@ -7,6 +8,8 @@ import { MatTable } from '@angular/material/table';
   styleUrls: ['./snh.component.scss']
 })
 export class SnhComponent {
+
+  @ViewChild(MatAccordion) accordion!: MatAccordion;
 
   columnas: string[] = ['codigo', 'clave', 'ducto', 'borrar'];
 

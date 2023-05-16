@@ -2,10 +2,19 @@ h2 {
     margin-left: 2%;
 }
 
-.cg-padd {
-    padding: 20px;
+// .cg-padd {
+//     padding: 20px;
+// }
+
+// mat-tab {
+//     padding: 20px;
+// }
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
 }
 
-mat-tab {
-    padding: 20px;
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+    margin-left: 8px;
 }
