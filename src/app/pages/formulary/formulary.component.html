@@ -1,11 +1,6 @@
-<h2>Sistema Nacional de Gasoductos</h2>
+<h2>Reporte de Inspección con Líquidos Penetrantes</h2>
 <hr>
 <div class="flex-container">
-
-    <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>12/05/2023</mat-label>
-        <input matInput placeholder="Simple placeholder">
-    </mat-form-field> -->
 
     <mat-form-field appearance="fill" class="flex-items">
         <mat-label>Ingrese un rango de fechas</mat-label>
@@ -29,24 +24,25 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Cliente</mat-label>
-        <input matInput placeholder="Escriba el nombre del cliente">
+        <mat-label>Sistema</mat-label>
+        <input matInput placeholder="Ingrese el sistema">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Número de Contrato</mat-label>
-        <input matInput placeholder="Ingrese el número de contrato">
+        <mat-label>Presión de Operación</mat-label>
+        <input matInput placeholder="Ingrese presión de operación">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Orden de Servicio</mat-label>
-        <input matInput placeholder="Ingrese la orden de servicio">
+        <mat-label>Temperatura de Operación</mat-label>
+        <input matInput placeholder="Ingrese temperatura de operación">
     </mat-form-field>
     
     <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Clave Área Unitaria (--Selector--)</mat-label>
         <input matInput placeholder="Simple placeholder">
     </mat-form-field> -->
+    
     <mat-form-field appearance="fill" class="flex-items">
         <mat-label>Clave - Área Unitaria</mat-label>
         <mat-select [(value)]="selected">
@@ -56,42 +52,60 @@
             <mat-option value="option3">Option 3</mat-option>
         </mat-select>
     </mat-form-field>
+    <!-- 1-6 -->
     
     <!-- <p>You selected: {{selected}}</p> -->
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Kilómetro Inicial</mat-label>
+        <input matInput placeholder="Ingrese el Kilómetro inicial">
+    </mat-form-field>
 
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Kilómetro Destino</mat-label>
+        <input matInput placeholder="Ingrese el Kilómetro de destino">
+    </mat-form-field>
+    <!-- 7-8 -->
+
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()"  class="flex-items">
         <mat-label>Descripción de la Obra</mat-label>
-        <input matInput placeholder="Escriba una descripción">
+        <textarea
+            matInput placeholder="Escriba una descripción"
+            [formControl]="commentFC"
+            (change)="onCommentChange()">
+        </textarea>
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Nombre de la Línea</mat-label>
-        <input matInput placeholder="Escriba el nombre de la línea">
+        <mat-label>Nombre de la Línea o Tramo</mat-label>
+        <input matInput placeholder="Escriba el nombre de la línea o el tramo">
     </mat-form-field>
+    <!-- 9-10 -->
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Localización</mat-label>
+        <mat-label>Localización (coordenadas)</mat-label>
         <input matInput placeholder="Ingrese localización">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Ubicación Técnica</mat-label>
-        <input matInput placeholder="Ingrese ubicación técnica">
+        <mat-label>Localización (KM)</mat-label>
+        <input matInput placeholder="Ingrese ubicación">
     </mat-form-field>
-    
+    <!-- 11-12 -->
+
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>No. de Equipo de la Línea Reg.</mat-label>
-        <input matInput placeholder="Ingrese el número de equipo">
+        <mat-label>Descripción de Actividades o Tipo de Inspección</mat-label>
+        <textarea
+            matInput placeholder="Describa una actividad o anote un tipo de inspección"
+            [formControl]="commentDA"
+            (change)="onCommentChangeDa()">
+        </textarea>
     </mat-form-field>
-    
-    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Descripción de Actividades</mat-label>
-        <input matInput placeholder="Escriba una descripción">
-    </mat-form-field>
+    <!-- 13 -->
 
     <div class="flex-items">
         <h3 class="text-center">Datos de la Pieza</h3>
     </div>
+    <!-- 14 -->
 
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Diametro</mat-label>
@@ -99,7 +113,7 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Espesor Normal</mat-label>
+        <mat-label>Espesor Nominal</mat-label>
         <input matInput placeholder="Ingrese el espesor">
     </mat-form-field>
     
@@ -109,18 +123,31 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Núnero de Serie</mat-label>
-        <input matInput placeholder="Ingrese el número de serie">
+        <mat-label>Zona Inspeccionada</mat-label>
+        <input matInput placeholder="Ingrese la zona inspeccionada">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Marca</mat-label>
-        <input matInput placeholder="Ingrese la marca">
+        <mat-label>Tipo de Material</mat-label>
+        <input matInput placeholder="Ingrese el tipo de material">
     </mat-form-field>
+
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Dimensiones</mat-label>
+        <input matInput placeholder="Anote las dimensiones">
+    </mat-form-field>
+    <!-- 15-20 -->
+
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Descripción de la Pieza (textarea)</mat-label>
+        <input matInput placeholder="Anote su descripción">
+    </mat-form-field>
+    <!-- 21 -->
 
     <div class="flex-items">
         <h3 class="text-center">Referencias</h3>
     </div>
+    <!-- 22 -->
 
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Temperatura de la Prueba</mat-label>
@@ -128,9 +155,10 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Acabado Superficial</mat-label>
+        <mat-label>Acabado Superficial o Condiciones de la Superficie</mat-label>
         <input matInput placeholder="Ingrese el acabado superficial">
     </mat-form-field>
+    <!-- 23-24 -->
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Iluminación</mat-label>
@@ -138,7 +166,7 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Material Absoente</mat-label>
+        <mat-label>Material Absorbente</mat-label>
         <input matInput placeholder="Ingrese material absorbente">
     </mat-form-field>
     
@@ -161,11 +189,13 @@
         <mat-label>Procedimiento</mat-label>
         <input matInput placeholder="Ingrese procedimiento">
     </mat-form-field>
+    <!-- 25-30 -->
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Técnica de Aplicación</mat-label>
-        <input matInput placeholder="Escriba la técnica de aplicación">
+        <mat-label>Técnica o Método de Aplicación</mat-label>
+        <input matInput placeholder="Escriba la técnica o el método de aplicación">
     </mat-form-field>
+    <!-- 31 -->
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Aplicación</mat-label>
@@ -186,12 +216,12 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Penetrante Marca</mat-label>
+        <mat-label>Marca Penetrante</mat-label>
         <input matInput placeholder="Escriba la marca penetrante">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>No. Lote</mat-label>
+        <mat-label>No. Lote Penetrante</mat-label>
         <input matInput placeholder="Ingrese el número de lote">
     </mat-form-field>
     
@@ -201,12 +231,12 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Removedor Marca</mat-label>
+        <mat-label>Marca Removedor</mat-label>
         <input matInput placeholder="Escriba la marca del removedor">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>No. Lote</mat-label>
+        <mat-label>No. Lote Removedor</mat-label>
         <input matInput placeholder="Ingrese el número de lote">
     </mat-form-field>
     
@@ -216,14 +246,30 @@
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>Revelador marca</mat-label>
+        <mat-label>Marca Revelador</mat-label>
         <input matInput placeholder="Escriba la marca del revelador">
     </mat-form-field>
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-        <mat-label>No. Lote</mat-label>
+        <mat-label>No. Lote Marca</mat-label>
         <input matInput placeholder="Ingrese el número de lote">
     </mat-form-field>
+    
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Tipo / Grupo o Técnica de Penetración</mat-label>
+        <input matInput placeholder="Ingrese el tiempo de revelado">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Tipo de Penetrante</mat-label>
+        <input matInput placeholder="Escriba la marca del revelador">
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-label>Tipo de Revelador</mat-label>
+        <input matInput placeholder="Ingrese el número de lote">
+    </mat-form-field>
+    <!-- 32-46 -->
     
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Referencia</mat-label>
@@ -244,40 +290,42 @@
         <mat-label>Identificación</mat-label>
         <input matInput placeholder="Ingrese una Identificación">
     </mat-form-field>
+    <!-- 47-50 -->
 
     <div class="flex-items">
         <h3 class="text-center">Tabla</h3>
     </div>
+    <!-- 51 -->
 
-    <div class="flex-items">
+    <!-- <div class="flex-items">
         <div class="demo-button-container">
             <button mat-raised-button (click)="addData()" class="demo-button">
-                Add data
+                Agregar Dato
             </button>
             <button mat-raised-button [disabled]="!dataToDisplay.length" (click)="removeData()" class="demo-button">
-                Remove data
+                Borrar Dato
             </button>
         </div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-            <!-- Position Column -->
+            Position Column
             <ng-container matColumnDef="position">
                 <th mat-header-cell *matHeaderCellDef>No.</th>
                 <td mat-cell *matCellDef="let element">{{element.position}}</td>
             </ng-container>
         
-            <!-- Name Column -->
+            Name Column
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Name</th>
                 <td mat-cell *matCellDef="let element">{{element.name}}</td>
             </ng-container>
         
-            <!-- Weight Column -->
+            Weight Column
             <ng-container matColumnDef="weight">
                 <th mat-header-cell *matHeaderCellDef>Weight</th>
                 <td mat-cell *matCellDef="let element">{{element.weight}}</td>
             </ng-container>
         
-            <!-- Symbol Column -->
+            Symbol Column
             <ng-container matColumnDef="symbol">
                 <th mat-header-cell *matHeaderCellDef>Symbol</th>
                 <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
@@ -286,11 +334,138 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+    </div> -->
+    <div class="flex-items">
+        <table mat-table [dataSource]="data" class="mat-elevation-z8" #table1>
+    
+            <ng-container matColumnDef="identificacion">
+                <th mat-header-cell *matHeaderCellDef> Identificación </th>
+                <td mat-cell *matCellDef="let article"> {{article.identificacion}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="elemento_a">
+                <th mat-header-cell *matHeaderCellDef> Elemento A </th>
+                <td mat-cell *matCellDef="let article"> {{article.elemento_a}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="elemento_b">
+                <th mat-header-cell *matHeaderCellDef> Elemento B </th>
+                <td mat-cell *matCellDef="let article"> {{article.elemento_b}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="evaluacion">
+                <th mat-header-cell *matHeaderCellDef> Evaluación </th>
+                <td mat-cell *matCellDef="let article"> {{article.evaluacion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="longitud_total">
+                <th mat-header-cell *matHeaderCellDef> Longitud Total<br>de la Evaluación<br>o Longitud de Inspección </th>
+                <td mat-cell *matCellDef="let article"> {{article.longitud_total}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipo_defecto">
+                <th mat-header-cell *matHeaderCellDef> Tipo de Defecto </th>
+                <td mat-cell *matCellDef="let article"> {{article.tipo_defecto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dimension_defecto">
+                <th mat-header-cell *matHeaderCellDef> Dimensión de Defecto </th>
+                <td mat-cell *matCellDef="let article"> {{article.dimension_defecto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="observaciones">
+                <th mat-header-cell *matHeaderCellDef> Observaciones </th>
+                <td mat-cell *matCellDef="let article"> {{article.observaciones}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef> Resultado / Dictamen </th>
+                <td mat-cell *matCellDef="let article">
+                    Aprobado <mat-checkbox></mat-checkbox>
+                </td>
+            </ng-container> -->
+
+            <!-- <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef> Resultado / Dictamen<br>
+                    <mat-checkbox class="cg-center" checked="selection.hasValue() && isAllSelected()" indeterminate="selection.hasValue() && !isAllSelected()" aria-label="checkboxLabel()">
+                    </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row" class="cg-center">
+                    <mat-checkbox class="cg-center" click="$event.stopPropagation()" change="$event ? selection.toggle(row) : null"
+                        checked="selection.isSelected(row)" aria-label="checkboxLabel(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="borrar">
+                <th mat-header-cell *matHeaderCellDef> Borrar </th>
+                <td mat-cell *matCellDef="let j = index;">
+                    <button mat-raised-button color="warn" focusable="false" (click)="eraseRow(j)">
+                        Borrar
+                    </button>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+        </table>
+        <div class="container">
+    
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.identificacion" type="number" placeholder="Ingrese código">
+            </mat-form-field>
+    
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.elemento_a" type="text" placeholder="Ingrese elemento A">
+            </mat-form-field>
+    
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.elemento_b" type="text" placeholder="Ingrese elemento B">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.evaluacion" type="number" placeholder="Ingrese su evaluacion">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.longitud_total" type="number" placeholder="Ingrese la longitud total o longitud de inspección">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.tipo_defecto" type="text" placeholder="Ingrese tipo de defecto">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.dimension_defecto" type="text" placeholder="Ingrese dimensión de defecto">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [(ngModel)]="selectedarticle.observaciones" type="text" placeholder="Anote sus observaciones">
+            </mat-form-field>
+            
+            <button mat-raised-button color="primary" (click)="aggregate()">Agregar</button>
+    
+        </div>
     </div>
+    <!-- 52 -->
 
     <div class="flex-items">
         <h3 class="text-center"><Object>Observaciones</Object></h3>
     </div>
+    <!-- 53 -->
     
     <mat-radio-group aria-label="Select an option" class="flex-items">
         <mat-label><strong><i>Resultado: </i></strong></mat-label>
@@ -298,16 +473,23 @@
         <mat-radio-button value="2">Rechazado</mat-radio-button>
         <mat-radio-button value="3">Recomendación. Examen Complementario</mat-radio-button>
     </mat-radio-group>
+    <!-- 54 -->
 
     <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
         <mat-label>Observaciones</mat-label>
-        <input matInput placeholder="Escriba sus observaciones">
+        <textarea
+            matInput placeholder="Anote sus observaciones"
+            [formControl]="commentOb"
+            (change)="onCommentChangeOb()">
+        </textarea>
     </mat-form-field>
+    <!-- 55 -->
 
     <section class="flex-items">
         <div class="example-button-row">
             <button mat-raised-button color="primary">Guardar</button>
         </div>
     </section>
+    <!-- 56 -->
 
 </div>

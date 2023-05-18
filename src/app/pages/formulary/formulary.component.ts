@@ -1,7 +1,8 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
+import { MatTable } from '@angular/material/table';
 import { Observable, ReplaySubject } from 'rxjs';
 
 export interface PeriodicElement {
@@ -30,7 +31,22 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./formulary.component.scss'],
 })
 export class FormularyComponent {
-  selected = 'option2';
+
+  // selection = new SelectionModel<PeriodicElement>(true, []);
+
+  commentFC = new FormControl();
+  onCommentChange() {
+    console.log(this.commentFC.value);
+  }
+  commentDA = new FormControl();
+  onCommentChangeDa() {
+    console.log(this.commentDA.value);
+  }commentOb = new FormControl();
+  onCommentChangeOb() {
+    console.log(this.commentOb.value);
+  }
+
+  selected = '-- Seleccione --';
 
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
@@ -44,6 +60,61 @@ export class FormularyComponent {
     floatLabel: this.floatLabelControl,
   });
 
+  //=== Table =====================================
+  columns: string[] = [
+    'identificacion',
+    'elemento_a',
+    'elemento_b',
+    'evaluacion',
+    'longitud_total',
+    'tipo_defecto',
+    'dimension_defecto',
+    'observaciones',
+    'select',
+    'borrar'
+  ];
+  data: Article[] = [
+    new Article(1, 'Elemento A1', 'Elemento B1', 7.8, 16000, 'No conecta', 'Tres campos', 'Demasiados rangos de error'),
+    new Article(2, 'Elemento A2', 'Elemento B2', 8.9, 32000, 'Sí conecta', 'Dos campos', 'Corregidos los rangos de error'),
+    new Article(3, 'Elemento A3', 'Elemento B3', 9.0, 48000, 'No conecta', 'Cuatro campos', 'Más rangos de error')
+  ];
+  // data: Article[] = [
+  //     new Article(1, 'Elemento A1', 'Elemento B1', 7.8, 16000, 'No conecta', 'Demasiados rangos de error'),
+  //     new Article(2, 'Elemento A2', 'Elemento B2', 8.9, 32000, 'Sí conecta', 'Corregidos los rangos de error'),
+  //     new Article(3, 'Elemento A3', 'Elemento B3', 9.0, 48000, 'No conecta', 'Más rangos de error')
+  //   ];
+  selectedarticle: Article = new Article(0, "", "", 0, 0, "", "", "");
+  // selectedarticle: Article = new Article(0, "", "",  0, 0, "", "");
+
+
+  @ViewChild(MatTable) table1!: MatTable<Article>;
+
+  eraseRow(cod: number) {
+    if (confirm("Realmente quiere borrarlo?")) {
+      this.data.splice(cod, 1);
+      this.table1.renderRows();
+    }
+  }
+
+  aggregate() {
+    this.data.push(
+      new Article(
+        this.selectedarticle.identificacion,
+        this.selectedarticle.elemento_a,
+        this.selectedarticle.elemento_b,
+        this.selectedarticle.evaluacion,
+        this.selectedarticle.longitud_total,
+        this.selectedarticle.tipo_defecto,
+        this.selectedarticle.dimension_defecto,
+        this.selectedarticle.observaciones,
+        // this.selectedarticle.select,
+        )
+    );
+    this.table1.renderRows();
+    this.selectedarticle = new Article(0, "", "", 0, 0, "", "", "");
+    // this.selectedarticle = new Article(0, "", "",  0, 0, "", "");
+  }
+
   constructor(private _formBuilder: FormBuilder) {}
 
   getFloatLabelValue(): FloatLabelType {
@@ -51,25 +122,57 @@ export class FormularyComponent {
   }
 
   // Mat-Tabla
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['identificacion', 'elemento_a', 'elemento_b', 'evaluacion', 'longitud_total', 'tipo_defecto', 'dimension_defecto', 'observaciones',];
   dataToDisplay = [...ELEMENT_DATA];
 
-  dataSource = new ExampleDataSource(this.dataToDisplay);
+  // Checkbox
+  /** Whether the number of selected elements matches the total number of rows. */
+  // isAllSelected() {
+  //   const numSelected = this.selection.selected.length;
+  //   const numRows = this.dataSource.data.length;
+  //   return numSelected === numRows;
+  // }
+  
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  // toggleAllRows() {
+  //   if (this.isAllSelected()) {
+  //     this.selection.clear();
+  //     return;
+  //   }
 
-  addData() {
-    const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-    this.dataToDisplay = [
-      ...this.dataToDisplay,
-      ELEMENT_DATA[randomElementIndex],
-    ];
-    this.dataSource.setData(this.dataToDisplay);
+  //   this.selection.select(...this.dataSource.data);
+
+  //   /** The label for the checkbox on the passed row */
+  // checkboxLabel(row?: PeriodicElement): string {
+  //   if (!row) {
+  //     return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+  //   }
+  //   return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  // }
+
+
   }
 
-  removeData() {
-    this.dataToDisplay = this.dataToDisplay.slice(0, -1);
-    this.dataSource.setData(this.dataToDisplay);
-  }
-}
+  //=== Table =====================================
+  //=== Button ====================================
+  //=== Button ====================================
+
+  // dataSource = new ExampleDataSource(this.dataToDisplay);
+
+  // addData() {
+  //   const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
+  //   this.dataToDisplay = [
+  //     ...this.dataToDisplay,
+  //     ELEMENT_DATA[randomElementIndex],
+  //   ];
+  //   this.dataSource.setData(this.dataToDisplay);
+  // }
+
+  // removeData() {
+  //   this.dataToDisplay = this.dataToDisplay.slice(0, -1);
+  //   this.dataSource.setData(this.dataToDisplay);
+  // }
+// }
 
 class ExampleDataSource extends DataSource<PeriodicElement> {
   private _dataStream = new ReplaySubject<PeriodicElement[]>();
@@ -88,4 +191,17 @@ class ExampleDataSource extends DataSource<PeriodicElement> {
   setData(data: PeriodicElement[]) {
     this._dataStream.next(data);
   }
+}
+export class Article {
+  constructor(
+    public identificacion: number,
+    public elemento_a: string,
+    public elemento_b: string,
+    public evaluacion: number,
+    public longitud_total: number,
+    public tipo_defecto: string,
+    public dimension_defecto: string,
+    public observaciones: string,
+    // public select: boolean
+  ) {}
 }
