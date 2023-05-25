@@ -30,6 +30,7 @@ const routes: Routes = [
     { path: 'SNH', component: SnhComponent },
     { path: 'SNG/snh-form', component: SnhFormComponent },
     { path: 'formularios', component: FormularyComponent},
+    { path: 'editar-formulario/:id', component: FormularyComponent},
     { path: '**', component: NopagefoundComponent }
 ];
 
