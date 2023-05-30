@@ -1,4 +1,28 @@
-export class AreaUnitariaKm {
+// export class AreaUnitariaI {
+//     _id?: number;
+//     area_unitaria: string;
+
+//     constructor( area_unitaria: string ) {
+//         this.area_unitaria = area_unitaria;
+//     }
+// }
+
+// export class KilometrajeI {
+//     _id?: number;
+//     km_inicial: string;
+//     km_inicial_ddv: string;
+//     km_final: string;
+//     km_final_ddv: string;
+
+//     constructor( km_inicial: string, km_inicial_ddv: string, km_final: string, km_final_ddv: string ) {
+//         this.km_inicial = km_inicial;
+//         this.km_inicial_ddv = km_inicial_ddv;
+//         this.km_final = km_final;
+//         this.km_final_ddv = km_final_ddv;
+//     }
+// }
+
+export class AreaUnitariaI {
     _id?: number;
 
     tramo: number;

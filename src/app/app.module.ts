@@ -10,6 +10,9 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { SngComponent } from './pages/sng/sng.component';
 import { SnhComponent } from './pages/snh/snh.component';
 import { FormularyComponent } from './pages/formulary/formulary.component';
+import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
+import { DesignFormComponent } from './pages/design-form/design-form.component';
+import { ListarDisenoComponent } from './components/listar-diseno/listar-diseno.component';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -29,11 +32,18 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+// import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
+
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -48,6 +58,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SngFormComponent,
     SnhFormComponent,
     FormularyComponent,
+    ProfileEditorComponent,
+    DesignFormComponent,
+    ListarDisenoComponent
   ],
   imports: [
     BrowserModule,
@@ -68,13 +81,34 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HttpClientModule,
     MatExpansionModule,
     MatDatepickerModule,
-    MatNativeDateModule,
+    MatMomentDateModule,
     MatRadioModule,
     MatDialogModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatPaginatorModule
   ],
-  providers: [MatDatepickerModule, MatNativeDateModule],
+  providers: [
+    MatDatepickerModule,
+    MatMomentDateModule,
+    // {
+    //   provide: MAT_DATE_FORMATS,
+    //   useValue: {
+    //     parse: {
+    //       dateInput: ['l', 'LL'],
+    //     },
+    //     display: {
+    //       dateInput: 'L',
+    //       monthYearLabel: 'MMM YYYY',
+    //       dateA11yLabel: 'LL',
+    //       monthYearA11yLabel: 'MMMM YYYY',
+    //     },
+    //   },
+    // },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

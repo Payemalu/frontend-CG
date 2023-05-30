@@ -1,12 +1,12 @@
 export class LiquidoPenetrante {
     _id?: number;
-    fechaConstruccionStart: Date;
-    fechaConstruccionEnd: Date;
+    fechaInicio: string;
+    fechaFinal: string;
     numeroReporte: string;
     sistema: string;
     presionOperacion: string;
     temperaturaOperacion: string;
-    claveAreaUnitaria: string;
+    areaUnitaria: string;
     kilometroInicial: string;
     kilometroDestino: string;
     descripcionObra: string;
@@ -62,13 +62,13 @@ export class LiquidoPenetrante {
     observaciones: string;
 
     constructor(
-        fechaConstruccionStart: Date,
-        fechaConstruccionEnd: Date,
+        fechaInicio: string,
+        fechaFinal: string,
         numeroReporte: string,
         sistema: string,
         presionOperacion: string,
         temperaturaOperacion: string,
-        claveAreaUnitaria: string,
+        areaUnitaria: string,
         kilometroInicial: string,
         kilometroDestino: string,
         descripcionObra: string,
@@ -124,13 +124,13 @@ export class LiquidoPenetrante {
         observaciones: string,
     )
     {
-        this.fechaConstruccionStart = fechaConstruccionStart;
-        this.fechaConstruccionEnd = fechaConstruccionEnd;
+        this.fechaInicio = fechaInicio;
+        this.fechaFinal = fechaFinal;
         this.numeroReporte = numeroReporte;
         this.sistema = sistema;
         this.presionOperacion = presionOperacion;
         this.temperaturaOperacion = temperaturaOperacion;
-        this.claveAreaUnitaria = claveAreaUnitaria;
+        this.areaUnitaria = areaUnitaria;
         this.kilometroInicial = kilometroInicial;
         this.kilometroDestino = kilometroDestino;
         this.descripcionObra = descripcionObra;

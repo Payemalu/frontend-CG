@@ -1,0 +1,160 @@
+h2 {
+    color: #5e5e5e;
+    margin: 30px 0 20px 40px;
+}
+
+h3 {
+    color: #5e5e5e;
+}
+
+hr {
+    border: .5 solid #8e8e8e;
+    margin: 30px 0px;
+}
+
+.example-container mat-form-field+mat-form-field {
+    margin-left: 15px;
+}
+
+.example-container mat-form-field {
+    width: 320px;
+}
+
+.example-container form {
+    margin-bottom: 20px;
+}
+
+.example-container form>* {
+    margin: 12px 0;
+}
+
+.example-container .mat-radio-button {
+    margin: 0 12px;
+}
+
+.example-form-fields {
+    display: flex;
+    align-items: flex-start;
+}
+
+.example-form-field {
+    margin: 0 8px 16px 0;
+  }
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: space-around;
+    gap: 25px; 
+    padding-top: 25px;
+}
+
+.flex-items:nth-child(1) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    width: 94.5%;
+}
+
+.flex-items:nth-child(2),
+.flex-items:nth-child(3),
+.flex-items:nth-child(4),
+.flex-items:nth-child(5) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    width: 22.5%;
+}
+
+.flex-items:nth-child(6),
+.flex-items:nth-child(19) {
+    background-color: rgb(230, 230, 230);
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    padding-left: 25px;
+    width: 100%;
+}
+
+.flex-items:nth-child(7),
+.flex-items:nth-child(8),
+.flex-items:nth-child(9),
+.flex-items:nth-child(10),
+.flex-items:nth-child(11),
+.flex-items:nth-child(12),
+.flex-items:nth-child(13),
+.flex-items:nth-child(14),
+.flex-items:nth-child(15),
+.flex-items:nth-child(16),
+.flex-items:nth-child(17),
+.flex-items:nth-child(18),
+.flex-items:nth-child(20),
+.flex-items:nth-child(21),
+.flex-items:nth-child(22),
+.flex-items:nth-child(23),
+.flex-items:nth-child(24),
+.flex-items:nth-child(25) {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    width: 30.5%;
+}
+
+.demo-table {
+    width: 100%;
+}
+
+.demo-button-container {
+    padding-bottom: 16px;
+}
+
+.demo-button+.demo-button {
+    margin-left: 8px;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+}
+
+table {
+    width: 90%;
+    margin: 1rem auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin:1rem auto;
+    max-width: 600px;
+    box-shadow: -1px 3px 66px 0px rgba(0,0,0,0.75);
+    padding: 1rem;
+}
+
+.cg-center {
+    margin: auto 0;
+    width: 160px;
+}
+
+.cg-hr {
+    border: .5 solid #8e8e8e;
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+button {
+    margin-bottom: 30px;
+}

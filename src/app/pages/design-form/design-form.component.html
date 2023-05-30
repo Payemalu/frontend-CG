@@ -1,0 +1,184 @@
+<h2>Diseño y Construcción</h2>
+<hr>
+
+<!-- Start Form -->
+<form action="" [formGroup]="disenoForm" (ngSubmit)="agregarDiseno()">
+
+    <!-- Start Container -->
+    <div class="flex-container">
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Nombre Propio</mat-label>
+            <input
+                formControlName="nombre_propio"
+                matInput placeholder="Escriba su nombre"
+            >
+            <mat-error *ngIf="disenoForm.get('nombre_propio')?.hasError('required') && disenoForm.get('nombre_propio')?.touched">
+                <span>El nombre propio <strong>es obligatorio</strong></span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Origen Km</mat-label>
+            <input
+                formControlName="origen_km"
+                matInput placeholder="Ingrese el Kilómetro origen"
+            >
+            <mat-error *ngIf="disenoForm.get('origen_km')?.hasError('required') && disenoForm.get('origen_km')?.touched">
+                <span>El kilometraje de origen <strong>es obligatorio</strong></span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Destino Km</mat-label>
+            <input
+                formControlName="destino_km"
+                matInput placeholder="Ingrese el Kilómetro destino"
+            >
+            <mat-error *ngIf="disenoForm.get('destino_km')?.hasError('required') && disenoForm.get('destino_km')?.touched">
+                <span>El kilometraje de destino <strong>es obligatorio</strong></span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Origen Coordenadas</mat-label>
+            <input
+                formControlName="origen_coordenadas"
+                matInput placeholder="Ingrese las coordenadas de origen"
+            >
+            <mat-error *ngIf="disenoForm.get('origen_coordenadas')?.hasError('required') && disenoForm.get('origen_coordenadas')?.touched">
+                <span>Las coordenadas de origen <strong>son obligatorias</strong></span>
+            </mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Destino Coordenadas</mat-label>
+            <input
+                formControlName="destino_coordenadas"
+                matInput placeholder="Ingrese las coordenadas de destino"
+            >
+            <mat-error *ngIf="disenoForm.get('destino_coordenadas')?.hasError('required') && disenoForm.get('destino_coordenadas')?.touched">
+                <span>Las coordenadas de destino <strong>son obligatorias</strong></span>
+            </mat-error>
+        </mat-form-field>
+
+        <div class="flex-items">
+            <h3 class="text-center">Diseño</h3>
+        </div>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Longitud</mat-label>
+            <input formControlName="longitud" matInput placeholder="Ingrese la longitud" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Diámetro Milímetros</mat-label>
+            <input formControlName="diametro_mm" matInput placeholder="Ingrese el diámetro en milímetros" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Diámetro Pulgadas</mat-label>
+            <input formControlName="diametro_inch" matInput placeholder="Ingrese el diámetro en pulgadas" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Espesor de Pared (milímetros)</mat-label>
+            <input formControlName="espesor_pared_mm" matInput placeholder="Ingrese el espesor de pared en milímetros" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Espesor de Pared (pulgadas)</mat-label>
+            <input formControlName="espesor_pared_inch" matInput placeholder="Ingrese el espesor de pared en pulgadas" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Especificación de Material</mat-label>
+            <input formControlName="especificacion_material" matInput placeholder="Especifique el material" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Temperatura de Diseño<br>Celsius o Centígrados (°C)</mat-label>
+            <input formControlName="temperatura_diseno_c" matInput placeholder="Ingrese temperatura en celsius o centígrados" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Temperatura de Diseño<br>Grados Fahrenheit (°F)</mat-label>
+            <input formControlName="temperatura_diseno_f" matInput placeholder="Ingrese temperatura en grados fahrenheit" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Fecha de Fabricación</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fecha_fabricacion">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Resistencia a la Tracción</mat-label>
+            <input formControlName="resistencia_traccion" matInput placeholder="Ingrese resistencia a la tracción" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Elemento Máximo del Carbono</mat-label>
+            <input formControlName="elemento_maximo_c" matInput placeholder="Ingrese el elemento máximo de carbono" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Límite Elástico</mat-label>
+            <input formControlName="limite_elastico" matInput placeholder="Ingrese el límite elástico" type="text" value="">
+        </mat-form-field>
+
+        <div class="flex-items">
+            <h3 class="text-center">Construcción</h3>
+        </div>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Fecha de Construcción</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="fecha_construccion">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Método de Recubrimiento de Campo</mat-label>
+            <input formControlName="metodo_recubrimiento" matInput placeholder="Ingrese el método de recubrimiento" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Tipo de Suelo</mat-label>
+            <input formControlName="tipo_suelo" matInput placeholder="Ingrese el tipo de suelo" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Material de Relleno</mat-label>
+            <input formControlName="material_relleno" matInput placeholder="Anote el material de relleno" type="text" value="">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Protección Catódica</mat-label>
+            <input formControlName="proteccion_catodica" matInput placeholder="Ingrese protección catódica" type="text" value="">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Tipo de Recubrimiento</mat-label>
+            <input formControlName="tipo_recubrimiento" matInput placeholder="Ingrese el tipo de recubrimiento" type="text" value="">
+        </mat-form-field>
+        
+        <hr class="cg-hr">
+        <section class="flex-items">
+            <div class="example-button-row">
+                <button type="submit"
+                        [disabled]="disenoForm.invalid"
+                        mat-raised-button color="primary">
+                        Guardar
+                </button>
+            </div>
+        </section>
+    
+    </div>
+    <!-- Finish Container -->
+
+</form>
+<!-- Finish Form -->

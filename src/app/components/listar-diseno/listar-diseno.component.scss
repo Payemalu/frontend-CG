@@ -1,0 +1,46 @@
+.zona-table {
+    margin: 35px;
+}
+
+h2 {
+    color: #5e5e5e;
+    margin: 30px 0 20px 40px;
+}
+
+h3 {
+    color: #5e5e5e;
+}
+
+hr {
+    border: .5 solid #8e8e8e;
+    margin: 30px 0px;
+}
+
+.diseno-container {
+    height: 500px;
+    width: 1050px;
+    max-width: 100%;
+    overflow: auto;
+}
+
+table {
+    width: 1200px;
+}
+
+td.mat-column-star {
+    width: 20px;
+    padding-right: 8px;
+}
+
+th.mat-column-position,
+td.mat-column-position {
+    padding-left: 8px;
+}
+
+.mat-mdc-table-sticky-border-elem-right {
+    border-left: 1px solid #e0e0e0;
+}
+
+.mat-mdc-table-sticky-border-elem-left {
+    border-right: 1px solid #e0e0e0;
+}

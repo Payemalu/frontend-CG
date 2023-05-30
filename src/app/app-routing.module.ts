@@ -7,6 +7,8 @@ import { SnhComponent } from "./pages/snh/snh.component";
 import { SngFormComponent } from "./pages/sng-form/sng-form.component";
 import { SnhFormComponent } from "./pages/snh-form/snh-form.component";
 import { FormularyComponent } from "./pages/formulary/formulary.component";
+import { DesignFormComponent } from "./pages/design-form/design-form.component";
+import { ListarDisenoComponent } from "./components/listar-diseno/listar-diseno.component";
 
 const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -30,6 +32,8 @@ const routes: Routes = [
     { path: 'SNH', component: SnhComponent },
     { path: 'SNG/snh-form', component: SnhFormComponent },
     { path: 'formularios', component: FormularyComponent},
+    { path: 'diseno', component: DesignFormComponent},
+    { path: 'listar-diseno', component: ListarDisenoComponent},
     { path: 'editar-formulario/:id', component: FormularyComponent},
     { path: '**', component: NopagefoundComponent }
 ];
