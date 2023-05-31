@@ -8,13 +8,16 @@ import { Observable } from 'rxjs';
 })
 export class DisenoService {
 
-  urlDg = 'http://localhost:5000/api/diseno/'
+  URL_Dg = 'http://localhost:5000/api/diseno/'
 
   constructor( private http: HttpClient ) { }
 
   guardarFormaDiseno(diseno: Diseno): Observable<any> {
-    return this.http.post(this.urlDg, diseno);
+    return this.http.post(this.URL_Dg, diseno);
+  }
+
+  obtenerListaDiseno() {
+    return this.http.get<Diseno[]>(this.URL_Dg);
   }
 
 }
- 
