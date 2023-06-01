@@ -5,7 +5,7 @@ export class Diseno {
     destino_km: string;
     origen_coordenadas: string;
     destino_coordenadas: string;
-    longitud: string;
+    longitud: number;
     diametro_mm: number;
     diametro_inch: number;
     espesor_pared_mm: number;
@@ -14,9 +14,9 @@ export class Diseno {
     temperatura_diseno_c: number;
     temperatura_diseno_f: number;
     fecha_fabricacion: string;
-    resistencia_traccion: string;
+    resistencia_traccion: number;
     elemento_maximo_c: string;
-    limite_elastico: string;
+    limite_elastico: number;
     fecha_construccion: string;
     metodo_recubrimiento: string;
     tipo_suelo: string;
@@ -30,7 +30,7 @@ export class Diseno {
         destino_km: string,
         origen_coordenadas: string,
         destino_coordenadas: string,
-        longitud: string,
+        longitud: number,
         diametro_mm: number,
         diametro_inch: number,
         espesor_pared_mm: number,
@@ -39,9 +39,9 @@ export class Diseno {
         temperatura_diseno_c: number,
         temperatura_diseno_f: number,
         fecha_fabricacion: string,
-        resistencia_traccion: string,
+        resistencia_traccion: number,
         elemento_maximo_c: string,
-        limite_elastico: string,
+        limite_elastico: number,
         fecha_construccion: string,
         metodo_recubrimiento: string,
         tipo_suelo: string,

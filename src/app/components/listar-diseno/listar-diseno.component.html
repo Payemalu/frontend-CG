@@ -10,121 +10,121 @@
     
             <!-- Name Column -->
             <ng-container matColumnDef="nombre_propio" sticky>
-                <th mat-header-cell *matHeaderCellDef> Nombre Propio </th>
-                <td mat-cell *matCellDef="let element"> {{element.nombre_propio}} </td>
+                <th mat-header-cell *matHeaderCellDef> Área Unitaria </th>
+                <td mat-cell *matCellDef="let element"> {{element.nombre_propio || '--'}} </td>
             </ng-container>
     
             <!-- Position Column -->
             <ng-container matColumnDef="origen_km">
                 <th mat-header-cell *matHeaderCellDef> Origen Km </th>
-                <td mat-cell *matCellDef="let element"> {{element.origen_km}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.origen_km || '--'}} </td>
             </ng-container>
     
             <!-- Weight Column -->
             <ng-container matColumnDef="destino_km">
                 <th mat-header-cell *matHeaderCellDef> Destino Km </th>
-                <td mat-cell *matCellDef="let element"> {{element.destino_km}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.destino_km || '--'}} </td>
             </ng-container>
     
             <!-- Symbol Column -->
             <ng-container matColumnDef="origen_coordenadas">
                 <th mat-header-cell *matHeaderCellDef> Origen Coordenadas </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.origen_coordenadas}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.origen_coordenadas || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="destino_coordenadas">
                 <th mat-header-cell *matHeaderCellDef> Destino Coordenadas </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.destino_coordenadas}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.destino_coordenadas || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="longitud">
                 <th mat-header-cell *matHeaderCellDef> Longitud </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.longitud}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.longitud || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="diametro_mm">
                 <th mat-header-cell *matHeaderCellDef> Diámetro Milímetros </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.diametro_mm}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.diametro_mm || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="diametro_inch">
                 <th mat-header-cell *matHeaderCellDef> Diámetro Pulgadas </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.diametro_inch}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.diametro_inch || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="espesor_pared_mm">
                 <th mat-header-cell *matHeaderCellDef> Espesor de Pared (mm) </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.espesor_pared_mm}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.espesor_pared_mm || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="espesor_pared_inch">
                 <th mat-header-cell *matHeaderCellDef> Espesor de Pared (pulg) </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.espesor_pared_inch}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.espesor_pared_inch || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="especificacion_material">
                 <th mat-header-cell *matHeaderCellDef> Especificación de Material </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.especificacion_material}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.especificacion_material || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="temperatura_diseno_c">
                 <th mat-header-cell *matHeaderCellDef> Temperatura de Diseño. Celsius o Centígrados (C°) </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.temperatura_diseno_c}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.temperatura_diseno_c || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="temperatura_diseno_f">
                 <th mat-header-cell *matHeaderCellDef> Temperatura de Diseño. Grados Fahrenheit (F°) </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.temperatura_diseno_f}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.temperatura_diseno_f || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="fecha_fabricacion">
                 <th mat-header-cell *matHeaderCellDef> Fecha de Fabricación </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.fecha_fabricacion}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.fecha_fabricacion || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="resistencia_traccion">
                 <th mat-header-cell *matHeaderCellDef> Resistencia a la Tracción </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.resistencia_traccion}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.resistencia_traccion || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="elemento_maximo_c">
                 <th mat-header-cell *matHeaderCellDef> Elemento Máximo del Carbono </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.elemento_maximo_c}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.elemento_maximo_c || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="limite_elastico">
                 <th mat-header-cell *matHeaderCellDef> Límite Elástico </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.limite_elastico}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.limite_elastico || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="fecha_construccion">
                 <th mat-header-cell *matHeaderCellDef> Fecha de Construcción </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.fecha_construccion}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.fecha_construccion || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="metodo_recubrimiento">
                 <th mat-header-cell *matHeaderCellDef> Método de Recubrimiento de Campo </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.metodo_recubrimiento}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.metodo_recubrimiento || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="tipo_suelo">
                 <th mat-header-cell *matHeaderCellDef> Tipo de Suelo </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.tipo_suelo}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.tipo_suelo || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="material_relleno">
                 <th mat-header-cell *matHeaderCellDef> Material de Relleno </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.material_relleno}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.material_relleno || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="proteccion_catodica">
                 <th mat-header-cell *matHeaderCellDef> Protección Catódica </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.proteccion_catodica}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.proteccion_catodica || '--'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="tipo_recubrimiento">
                 <th mat-header-cell *matHeaderCellDef> Tipo de Recubrimiento </th>
-                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.origen_coordenadas}} </td>
+                <td mat-cell *matCellDef="let listDiseno"> {{listDiseno.tipo_recubrimiento || '--'}} </td>
             </ng-container>
     
             <!-- Star Column -->

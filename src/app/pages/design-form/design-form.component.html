@@ -8,13 +8,13 @@
     <div class="flex-container">
 
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Nombre Propio</mat-label>
+            <mat-label>Área Unitaria</mat-label>
             <input
                 formControlName="nombre_propio"
-                matInput placeholder="Escriba su nombre"
+                matInput placeholder="Escriba el nombre del ducto"
             >
             <mat-error *ngIf="disenoForm.get('nombre_propio')?.hasError('required') && disenoForm.get('nombre_propio')?.touched">
-                <span>El nombre propio <strong>es obligatorio</strong></span>
+                <span>El nombre del ducto <strong>es obligatorio</strong></span>
             </mat-error>
         </mat-form-field>
         
@@ -113,6 +113,25 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+
+        <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Fecha de Fabricación</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input
+                    matStartDate
+                    formControlName="fechaInicio"
+                    matInput placeholder="Fecha de inicio"
+                >
+                <input
+                    matEndDate
+                    formControlName="fechaFinal"
+                    matInput placeholder="Fecha final"
+                >
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field> -->
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Resistencia a la Tracción</mat-label>
