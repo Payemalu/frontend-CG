@@ -8,13 +8,29 @@
     <div class="flex-container">
 
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Clave</mat-label>
+            <input
+                formControlName="clave"
+                matInput placeholder="Anote la clave"
+            >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Área Unitaria</mat-label>
             <input
-                formControlName="nombre_propio"
-                matInput placeholder="Escriba el nombre del ducto"
+                formControlName="area_unitaria"
+                matInput placeholder="Escriba el área unitaria"
             >
-            <mat-error *ngIf="disenoForm.get('nombre_propio')?.hasError('required') && disenoForm.get('nombre_propio')?.touched">
-                <span>El nombre del ducto <strong>es obligatorio</strong></span>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Tramo</mat-label>
+            <input
+                formControlName="tramo"
+                matInput placeholder="Escriba el nombre del tramo"
+            >
+            <mat-error *ngIf="disenoForm.get('tramo')?.hasError('required') && disenoForm.get('tramo')?.touched">
+                <span>El tramo <strong>es obligatorio</strong></span>
             </mat-error>
         </mat-form-field>
         
@@ -46,9 +62,6 @@
                 formControlName="origen_coordenadas"
                 matInput placeholder="Ingrese las coordenadas de origen"
             >
-            <mat-error *ngIf="disenoForm.get('origen_coordenadas')?.hasError('required') && disenoForm.get('origen_coordenadas')?.touched">
-                <span>Las coordenadas de origen <strong>son obligatorias</strong></span>
-            </mat-error>
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
@@ -57,9 +70,6 @@
                 formControlName="destino_coordenadas"
                 matInput placeholder="Ingrese las coordenadas de destino"
             >
-            <mat-error *ngIf="disenoForm.get('destino_coordenadas')?.hasError('required') && disenoForm.get('destino_coordenadas')?.touched">
-                <span>Las coordenadas de destino <strong>son obligatorias</strong></span>
-            </mat-error>
         </mat-form-field>
 
         <div class="flex-items">

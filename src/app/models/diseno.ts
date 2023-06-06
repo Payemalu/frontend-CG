@@ -1,6 +1,8 @@
 export class Diseno {
     _id?: number;
-    nombre_propio: string;
+    clave: string;
+    area_unitaria: number;
+    tramo: string;
     origen_km: string;
     destino_km: string;
     origen_coordenadas: string;
@@ -25,7 +27,9 @@ export class Diseno {
     tipo_recubrimiento: string;
 
     constructor(
-        nombre_propio: string,
+        clave: string,
+        area_unitaria: number,
+        tramo: string,
         origen_km: string,
         destino_km: string,
         origen_coordenadas: string,
@@ -50,7 +54,9 @@ export class Diseno {
         tipo_recubrimiento: string,
     )
     {
-        this.nombre_propio = nombre_propio;
+        this.clave = clave;
+        this.area_unitaria = area_unitaria;
+        this.tramo = tramo;
         this.origen_km = origen_km;
         this.destino_km = destino_km;
         this.origen_coordenadas = origen_coordenadas;

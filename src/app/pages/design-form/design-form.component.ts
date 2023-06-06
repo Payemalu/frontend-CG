@@ -23,11 +23,13 @@ export class DesignFormComponent implements OnInit {
     private disenoService: DisenoService
   ) {
     this.disenoForm = this.fb.group({
-      nombre_propio: ['', Validators.required],
+      clave: [''],
+      area_unitaria: [''],
+      tramo: ['', Validators.required],
       origen_km: ['', Validators.required],
       destino_km: ['', Validators.required],
-      origen_coordenadas: ['', Validators.required],
-      destino_coordenadas: ['', Validators.required],
+      origen_coordenadas: [''],
+      destino_coordenadas: [''],
       longitud: [''],
       diametro_mm: [''],
       diametro_inch: [''],
@@ -53,7 +55,9 @@ export class DesignFormComponent implements OnInit {
 
   agregarDiseno() {
     const DISENO: Diseno = {
-      nombre_propio: this.disenoForm.get('nombre_propio')?.value,
+      clave: this.disenoForm.get('clave')?.value,
+      area_unitaria: this.disenoForm.get('area_unitaria')?.value,
+      tramo: this.disenoForm.get('tramo')?.value,
       origen_km: this.disenoForm.get('origen_km')?.value,
       destino_km: this.disenoForm.get('destino_km')?.value,
       origen_coordenadas: this.disenoForm.get('origen_coordenadas')?.value,

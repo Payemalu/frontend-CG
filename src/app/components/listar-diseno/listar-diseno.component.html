@@ -7,11 +7,20 @@
     <section class="diseno-container mat-elevation-z8" tabindex="0">
         <table mat-table [dataSource]="dataSource">
         <!-- <table mat-table> -->
+            <ng-container matColumnDef="clave" sticky>
+                <th mat-header-cell *matHeaderCellDef> Clave </th>
+                <td mat-cell *matCellDef="let element"> {{element.clave || '--'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="area_unitaria" sticky>
+                <th mat-header-cell *matHeaderCellDef> Área Unitaria </th>
+                <td mat-cell *matCellDef="let element"> {{element.area_unitaria || '--'}} </td>
+            </ng-container>
     
             <!-- Name Column -->
-            <ng-container matColumnDef="nombre_propio" sticky>
-                <th mat-header-cell *matHeaderCellDef> Área Unitaria </th>
-                <td mat-cell *matCellDef="let element"> {{element.nombre_propio || '--'}} </td>
+            <ng-container matColumnDef="tramo">
+                <th mat-header-cell *matHeaderCellDef> Tramo </th>
+                <td mat-cell *matCellDef="let element"> {{element.tramo || '--'}} </td>
             </ng-container>
     
             <!-- Position Column -->

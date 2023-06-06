@@ -12,7 +12,9 @@ export class ListarDisenoComponent implements OnInit {
   listDiseno: Diseno[] = [];
 
   displayedColumns = [
-    'nombre_propio',
+    'clave',
+    'area_unitaria',
+    'tramo',
     'origen_km',
     'destino_km',
     'origen_coordenadas',
