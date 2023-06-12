@@ -33,7 +33,6 @@ interface Car {
 export class FormularyComponent implements OnInit {
 
   /*** Area selector ********************/
-  // public selectedKmIni: KilometrajeI = { _id: 0, kilometro_inicial: '', km_inicial_ddv: '', area_unitaria: '', km_final: '', km_final_ddv: '' };
   kilometroInicial: KilometrajeI[] = [];
   selected = 'Kilómetro Inicial';
   value = '';
@@ -48,10 +47,6 @@ export class FormularyComponent implements OnInit {
   selection = new SelectionModel<Article>(true, []);
 
   commentFC = new FormControl();
-
-  // today: Date = new Date();
-  // pipe = new DatePipe('es-MEX');
-  // todayWithPipe: any;
 
   onCommentChange() {
     console.log(this.commentFC.value);
@@ -68,14 +63,7 @@ export class FormularyComponent implements OnInit {
   onCommentChangeDP() {
     console.log(this.commentDP.value);
   }
-
   
-
-  // range = new FormGroup({
-  //   fechaConstruccionStart: new FormControl<Date | null>(null),
-  //   fechaConstruccionEnd: new FormControl<Date | null>(null),
-  // });
-
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto' as FloatLabelType);
   options = this.fb.group({
@@ -257,74 +245,15 @@ export class FormularyComponent implements OnInit {
           console.log(error);
         }
       );
-    
   }
 
-  // getAreasUnitarias1() {
-  //   this.dataService.getAreasUnitarias().subscribe((res) => {
-  //     this.dataService.areasUnitarias = res;
-  //     console.log('Áreas Unitarias: ', this.dataService.areasUnitarias);
-  //   });
-  // }
+  cambiarKilometraje(_id: any){}
 
-  // getAreasUnitarias() {
-  //   console.log('Obteniendo área unitaria...');
-  //   this.dataService.getAreasUnitarias()
-  //   .subscribe((res) => {
-  //     console.log('Áreas Unitarias: ', res);
-  //     this.listAreaUnitaria = res;
-  //   },
-  //   (error) => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // getKilometro_inicial() {
-  //   console.log('Obteniendo kilómetro inicial...');
-  //   this.dataService.getKilometro_inicial()
-  //   .subscribe((res) => {
-  //     console.log('Kilómetro inicial: ', res);
-  //     this.kilometro_inicial = res;
-  //   },
-  //   (error) => {
-  //     console.log(error);
-  //   });
-  // }
-
-  // editAreaUnitaria(areaUnitaria: AreaUnitariaI) {
-  //   this.dataService.areaUnitariaSeleccionada = areaUnitaria;
-  // }
-
-
-  cambiarKilometraje(_id: any){
-    console.log('Id->', _id);
-    // this.kilometro_inicial = this.dataService.getKilometro_inicial().filter(item => item.countryId == _id);
-  }
-
-  cambioRegion(dato:any){
-    //Aqui va tu logica de consulta a la BD
-
-    // this.kilometraje = this.kilometro_inicial[dato]
-  }
-
-
-
-
-  // onSelect1(_id: any): void {
-  //   console.log('Id->', _id);
-  //   this.kilometro_inicial = this.dataService.getKilometroInicial().filter(item => item.kilometro_inicial == _id);
-  // }
+  cambioRegion(dato:any){}
+  
   onSelect( id: any ):void {
-    console.log('Id->', id);
     this.dataService.getKilometroInicial();
   }
-
-  // compararNombres( areaUnitariaKm1:AreaUnitariaI, areaUnitariaKm2:AreaUnitariaI) {
-  //   if (areaUnitariaKm1==null || areaUnitariaKm2==null) {
-  //     return false
-  //   }
-  //   return areaUnitariaKm1.area_unitaria===areaUnitariaKm2.area_unitaria;
-  // }
 
   agregarLiquidoPenetrante() {
     const LIQUIDOPENETRANTE: LiquidoPenetrante = {
@@ -396,7 +325,6 @@ export class FormularyComponent implements OnInit {
       resultado: this.liqPenForm.get('resultado')?.value,
       observaciones: this.liqPenForm.get('observaciones')?.value,
     };
-    // console.log(LIQUIDOPENETRANTE);
     this.liquidoPenService
       .guardarLiquidoPenetrante(LIQUIDOPENETRANTE)
       .subscribe(
@@ -412,21 +340,7 @@ export class FormularyComponent implements OnInit {
         }
       );
   }
-
-  // traerAreasUnitarias() {
-  //   // console.log('Trayendo Áreas Unitarias...');
-  //   this.dataService.obtenerAreasUnitariasKm()
-  //   .subscribe(
-  //     (dataAU) => {
-  //       // console.log(dataAU);
-  //       this.listAreaUnitaria = dataAU;
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
+  
   getFloatLabelValue(): FloatLabelType {
     return this.floatLabelControl.value || 'auto';
   }
@@ -457,7 +371,6 @@ export class FormularyComponent implements OnInit {
       this.selection.clear();
       return;
     }
-    // this.selection.select(...this.dataSource.data);
   }
 
   /** The label for the checkbox on the passed row */
@@ -499,5 +412,3 @@ export class Article {
     public select: boolean
   ) {}
 }
-
-// const ELEMENT_DATA: Element[] = [{ name: 'Arnold', item: 'Laptop', item2: 'Audífonos' }];

@@ -5,8 +5,6 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar><img src="./../../../assets/images/logoDTP.png" routerLink="/dashboard"></mat-toolbar>
     <mat-nav-list>
-      <!-- <a mat-list-item href="#">SNG</a>
-      <a mat-list-item href="#">SNH</a> -->
       <a mat-list-item routerLink="/dashboard">Dashboard</a>
       <a mat-list-item routerLink="/SNG">SNG</a>
       <a mat-list-item routerLink="/SNH">SNH</a>
@@ -14,11 +12,9 @@
       <a mat-list-item routerLink="/diseno">Identificación Diseño</a>
       <a mat-list-item routerLink="/construccion">Identificación Construcción</a>
       <a mat-list-item routerLink="/listar-diseno">Listas</a>
-      <!-- <a mat-list-item href="#">Link 3</a> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <!-- <mat-toolbar color="primary"> -->
     <mat-toolbar class="cg-bg">
       <button
         type="button"

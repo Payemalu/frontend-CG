@@ -105,7 +105,6 @@ export class ConstructionFormComponent implements OnInit {
         (res) => {
           this.kilometroInicial = res;
           this.ductos = this.kilometroInicial;
-          console.log('DuctosConstruccion->', this.ductos);
         },
         (error) => {
           console.log(error);
@@ -130,7 +129,6 @@ export class ConstructionFormComponent implements OnInit {
       proteccion_catodica: this.construccionForm.get('proteccion_catodica')?.value,
       tipo_recubrimiento: this.construccionForm.get('tipo_recubrimiento')?.value,
     };    
-    console.log('Diseño->', CONSTRUCCION);
     this.construccionService
       .guardarFormaConstruccion(CONSTRUCCION)
       .subscribe(

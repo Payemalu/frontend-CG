@@ -15,7 +15,6 @@
                     formControlName="clave"
                     value="clave"
             >
-                <!-- <mat-option [value]="selected">{{selected}}</mat-option> -->
                 <mat-option *ngFor="let ducto of ductos" [value]="ducto.clave">{{ducto.clave}}</mat-option>
             </mat-select>
 
@@ -33,27 +32,7 @@
             >
                 <mat-option *ngFor="let ducto of ductos" [value]="ducto.area_unitaria">{{ducto.area_unitaria}} - {{ducto.nombre_tramo}}</mat-option>
             </mat-select>
-
-            <!-- <mat-error *ngIf="construccionForm.get('area_unitaria')?.hasError('required') && construccionForm.get('area_unitaria')?.touched">
-                <span>El área unitaria <strong>es obligatoria</strong></span>
-            </mat-error>  -->
         </mat-form-field>
-
-        <!-- <mat-form-field appearance="fill" class="flex-items">
-            <mat-label>Tramo</mat-label>
-            <mat-select
-                    (selectionChange)="selectedClue($event)"
-                    matInput placeholder="Seleccione un tramo"
-                    formControlName="tramo"
-                    value="tramo"
-            >
-                <mat-option *ngFor="let tramo of tramos" [value]="tramo.value">{{tramo.value}}</mat-option>
-            </mat-select>
-
-            <mat-error *ngIf="construccionForm.get('tramo')?.hasError('required') && construccionForm.get('tramo')?.touched">
-                <span>El tramo <strong>es obligatorio</strong></span>
-            </mat-error> 
-        </mat-form-field> -->
 
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tramo</mat-label>
@@ -84,9 +63,7 @@
                 readonly
             >
         </mat-form-field>
-
         
-
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Origen Coordenadas</mat-label>
             <input

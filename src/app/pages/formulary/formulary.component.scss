@@ -41,10 +41,7 @@ hr {
     margin: 0 8px 16px 0;
   }
 
-// mat-mdc-text-field-wrapper
-
 .flex-container {
-    // background-color: #cf0548;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -54,14 +51,6 @@ hr {
     gap: 25px; 
     padding-top: 25px;
 }
-// .flex-container>* {
-//     flex: 1 1 160px;
-// }
-
-// .flex-items {
-//     background-color:bisque;
-//     width: 33%;
-// }
 
 .flex-items:nth-child(1),
 .flex-items:nth-child(2),

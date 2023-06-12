@@ -15,7 +15,6 @@
                     formControlName="clave"
                     value="clave"
             >
-                <!-- <mat-option [value]="selected">{{selected}}</mat-option> -->
                 <mat-option *ngFor="let item of items" [value]="item.clave">{{item.clave}}</mat-option>
             </mat-select>
 
@@ -144,25 +143,6 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Fecha de Fabricación</mat-label>
-            <mat-date-range-input [rangePicker]="picker">
-                <input
-                    matStartDate
-                    formControlName="fechaInicio"
-                    matInput placeholder="Fecha de inicio"
-                >
-                <input
-                    matEndDate
-                    formControlName="fechaFinal"
-                    matInput placeholder="Fecha final"
-                >
-            </mat-date-range-input>
-            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field> -->
-        
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Resistencia a la Tracción</mat-label>
             <input formControlName="resistencia_traccion" matInput placeholder="Ingrese resistencia a la tracción" type="text" value="">

@@ -32,7 +32,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -102,20 +101,6 @@ import { MatCardModule } from '@angular/material/card';
   providers: [
     MatDatepickerModule,
     MatMomentDateModule,
-    // {
-    //   provide: MAT_DATE_FORMATS,
-    //   useValue: {
-    //     parse: {
-    //       dateInput: ['l', 'LL'],
-    //     },
-    //     display: {
-    //       dateInput: 'L',
-    //       monthYearLabel: 'MMM YYYY',
-    //       dateA11yLabel: 'LL',
-    //       monthYearA11yLabel: 'MMMM YYYY',
-    //     },
-    //   },
-    // },
   ],
   bootstrap: [AppComponent]
 })

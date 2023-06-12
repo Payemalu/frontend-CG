@@ -23,7 +23,6 @@ export class DesignFormComponent implements OnInit {
 
   /*** Area selector ********************/
   kilometroInicial: KilometrajeI[] = [];
-  // selected = 'Kilómetro Inicial';
   selected = '-- Seleccione una Clave --'
   value = '';
   dataSourceDg = new MatTableDataSource<KilometrajeI>(this.kilometroInicial);
@@ -98,9 +97,7 @@ export class DesignFormComponent implements OnInit {
       .subscribe(
         (res) => {
           this.kilometroInicial = res;
-          // this.items[0] = this.kilometroInicial[0];
           this.items = this.kilometroInicial;
-          console.log('Items->', this.items);
           this.items[0];
           this.items.sort();
         },
@@ -138,7 +135,6 @@ export class DesignFormComponent implements OnInit {
       proteccion_catodica: this.disenoForm.get('proteccion_catodica')?.value,
       tipo_recubrimiento: this.disenoForm.get('tipo_recubrimiento')?.value,
     };
-    console.log('Diseño->', DISENO);
     this.disenoService
       .guardarFormaDiseno(DISENO)
       .subscribe(

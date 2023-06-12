@@ -8,22 +8,9 @@ import { KilometrajeI } from '../models/areaUnitariaKm';
 })
 export class AreaUnitariaKmService {
 
-  // areaUnitariaSeleccionada: AreaUnitariaI | undefined;
-  
-  // areasUnitarias: AreaUnitariaI[] | undefined;
-
   URL_AU = 'http://localhost:5000/api/areaUnitaria';
 
-  // private areasUnitarias : AreaUnitariaI[] = [];
-  // private kilometraje : KilometrajeI[] = [];
-
-  constructor( private http: HttpClient) {
-    // this.areaUnitariaSeleccionada = new AreaUnitariaI(this.URL_AU);
-  }
-
-  getAreasUnitarias() {
-    // return this.http.get<AreaUnitariaI[]>(this.URL_AU);
-  }
+  constructor( private http: HttpClient) {}
 
   getKilometroInicial() {
     return this.http.get<KilometrajeI[]>(this.URL_AU);

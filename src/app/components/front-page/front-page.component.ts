@@ -10,16 +10,10 @@ import { Formulario } from 'src/app/models/formularios';
 export class FrontPageComponent implements OnInit {
 
   lista: Formulario[] = formularios
-  // lista: Formulario[] = [];
 
-  constructor() {
-    // this.lista = formularios;
-    // console.log('Portadas->', this.lista);
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    // this.lista = this.lista.filter( f => f.id >= 2 );
-    // console.log('Portadas con cambio->', this.lista);
     this.lista = formularios;
   }
 

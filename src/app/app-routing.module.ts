@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
 import { SngComponent } from "./pages/sng/sng.component";
 import { SnhComponent } from "./pages/snh/snh.component";
@@ -13,21 +12,6 @@ import { ConstructionFormComponent } from "./pages/construction-form/constructio
 
 const routes: Routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    // { path: 'contact-reactive', loadChildren: ()=>
-    //     import('./contact-reactive/contact-reactive.module')
-    //     .then(m => m.ContactReactiveModule)
-    // },
-    // { path: 'contact-template/:id', component: ContactComponent,
-    //     resolve: { departments: DataResolverService }
-    // },
-    { path: 'dashboard', component: DashboardComponent },
-    // {
-    //     path: 'users', component: UserComponent, canActivate: [PermissionsGuard],
-    //     children: [
-    //         { path: 'list', component: ListComponent },
-    //         { path: 'details', component: DetailsComponent }
-    //     ]
-    // },
     { path: 'SNG', component: SngComponent },
     { path: 'SNG/sng-form', component: SngFormComponent },
     { path: 'SNH', component: SnhComponent },

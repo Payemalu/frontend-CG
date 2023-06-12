@@ -35,16 +35,6 @@ export class SngComponent implements OnInit {
 
   bloquear: boolean = true;
 
-  // columnas: string[] = ['codigo', 'clave', 'ducto', 'borrar'];
-
-  // datos: Articulo[] = [
-  //   new Articulo('6421f10f5a215907217ffe73', 'SNG01', 'Ducto01'),
-  //   new Articulo('6421f1265a215907217ffe74', 'SNG02', 'Ducto02'),
-  //   new Articulo('6421f1265a215907217ffe75', 'SNG03', 'Ducto03'),
-  // ];
-
-  // articuloselect: Articulo = new Articulo("", "", "");
-
   constructor(
     private fb: FormBuilder,
     private _ductSvc: DuctoService
@@ -68,16 +58,12 @@ export class SngComponent implements OnInit {
   ngOnInit(): void {
     this.getDucts();
     this.listaDuctos = sng;
-    console.log('Ductos->', this.listaDuctos);
     this.listaCve = cveau;
-    console.log('Claves->', this.listaCve);
   }
 
   getDucts() {
-    console.log('Obteniendo ductos');
     this._ductSvc.obtenerDuctos().subscribe(
       (data) => {
-        console.log(data);
         this.listDucts = data;
       },
       (error) => {
@@ -104,38 +90,12 @@ export class SngComponent implements OnInit {
     if (selectedCve) this.ductoSng.controls['km_destino_ddv'].patchValue(selectedCve.km_destino_ddv);
   }
 
-  // borrarFila(cod: number) {
-  //   if (confirm("Realmente quiere borrarlo?")) {
-  //     this.datos.splice(cod, 1);
-  //     this.tabla1.renderRows();
-  //   }
-  // }
-
-  // agregar() {
-  //   this.datos.push(new Articulo(this.articuloselect.codigo, this.articuloselect.clave, this.articuloselect.ducto));
-  //   this.tabla1.renderRows();
-  //   this.articuloselect = new Articulo("", "", "");
-  // }
-
   setStep(index: number) {
     this.step = index;
-
-    this.bloquear = false;
-
-    setTimeout( () => {
-      // despues de 2 segundos se volverá a habilitar
-      this.bloquear = false;
-    }, 2000);
   }
 
   nextStep() {
     this.step++;
-    this.bloquear = true;
-
-    setTimeout( () => {
-      // despues de 2 segundos se volverá a habilitar
-      this.bloquear = false;
-    }, 2000);
   }
 
   prevStep() {
@@ -145,7 +105,6 @@ export class SngComponent implements OnInit {
 }
 
 export class Articulo {
-  // constructor(public codigo: number, public descripcion: string, public precio: number) {}
   constructor(
     public codigo: string,
     public clave: string,
