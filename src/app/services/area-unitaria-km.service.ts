@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AreaUnitariaI } from '../models/areaUnitariaKm';
-// import { KilometrajeI } from '../models/areaUnitariaKm';
+import { KilometrajeI } from '../models/areaUnitariaKm';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AreaUnitariaKmService {
 
-  areaUnitariaSeleccionada: AreaUnitariaI | undefined;
+  // areaUnitariaSeleccionada: AreaUnitariaI | undefined;
   
-  areasUnitarias: AreaUnitariaI[] | undefined;
+  // areasUnitarias: AreaUnitariaI[] | undefined;
 
   URL_AU = 'http://localhost:5000/api/areaUnitaria';
 
@@ -23,12 +22,12 @@ export class AreaUnitariaKmService {
   }
 
   getAreasUnitarias() {
-    return this.http.get<AreaUnitariaI[]>(this.URL_AU);
+    // return this.http.get<AreaUnitariaI[]>(this.URL_AU);
   }
 
-  // getKilometroInicial() {
-  //   return this.http.get<KilometrajeI[]>(this.URL_AU);
-  // }
+  getKilometroInicial() {
+    return this.http.get<KilometrajeI[]>(this.URL_AU);
+  }
 
   obtenerAreasUnitariasKm(): Observable<any> {
     return this.http.get( this.URL_AU );

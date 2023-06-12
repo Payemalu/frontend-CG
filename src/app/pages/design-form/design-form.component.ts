@@ -1,10 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
+import { MatSelectChange } from '@angular/material/select';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { KilometrajeI } from 'src/app/models/areaUnitariaKm';
 import { Diseno } from 'src/app/models/diseno';
+import { AreaUnitariaKmService } from 'src/app/services/area-unitaria-km.service';
 import { DisenoService } from 'src/app/services/diseno.service';
+
+interface Tramo {
+  value: number;
+}
 
 @Component({
   selector: 'app-design-form',
@@ -13,21 +21,36 @@ import { DisenoService } from 'src/app/services/diseno.service';
 })
 export class DesignFormComponent implements OnInit {
 
+  /*** Area selector ********************/
+  kilometroInicial: KilometrajeI[] = [];
+  // selected = 'Kilómetro Inicial';
+  selected = '-- Seleccione una Clave --'
+  value = '';
+  dataSourceDg = new MatTableDataSource<KilometrajeI>(this.kilometroInicial);
+  items = this.kilometroInicial;
+  /*** Area selector ********************/
+
   disenoForm: FormGroup;
-  selected = '-- Seleccione --'
+
+  tramos: Tramo[] = [
+    {value: 1},
+    {value: 2}
+  ];
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private toastr: ToastrService,
-    private disenoService: DisenoService
+    private disenoService: DisenoService,
+    private dataService: AreaUnitariaKmService
   ) {
     this.disenoForm = this.fb.group({
-      clave: [''],
-      area_unitaria: [''],
+      clave: ['', Validators.required],
+      area_unitaria: ['', Validators.required],
       tramo: ['', Validators.required],
-      origen_km: ['', Validators.required],
-      destino_km: ['', Validators.required],
+      km_inicial_ddv: [],
+      km_destino_ddv: [],
+
       origen_coordenadas: [''],
       destino_coordenadas: [''],
       longitud: [''],
@@ -51,15 +74,49 @@ export class DesignFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getKilometroInicial();
+  }
+
+  selectedType(trigger: MatSelectChange) {
+    this.dataSourceDg = trigger.value;
+
+    const selectedItem = this.items.find((x) => x.clave == trigger.value);
+    const selectedAU = this.items.find((x) => x.area_unitaria == trigger.value);
+
+    if ( selectedItem ) this.disenoForm.controls['area_unitaria'].patchValue(selectedItem.area_unitaria);
+    if ( selectedItem ) this.disenoForm.controls['km_inicial_ddv'].patchValue(selectedItem.km_inicial_ddv);
+    if ( selectedItem ) this.disenoForm.controls['km_destino_ddv'].patchValue(selectedItem.km_destino_ddv);
+
+    if ( selectedAU ) this.disenoForm.controls['clave'].patchValue(selectedAU.clave);
+    if ( selectedAU ) this.disenoForm.controls['km_inicial_ddv'].patchValue(selectedAU.km_inicial_ddv);
+    if ( selectedAU ) this.disenoForm.controls['km_destino_ddv'].patchValue(selectedAU.km_destino_ddv);
+  }
+
+  getKilometroInicial() {
+    this.dataService.getKilometroInicial()
+      .subscribe(
+        (res) => {
+          this.kilometroInicial = res;
+          // this.items[0] = this.kilometroInicial[0];
+          this.items = this.kilometroInicial;
+          console.log('Items->', this.items);
+          this.items[0];
+          this.items.sort();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
 
   agregarDiseno() {
     const DISENO: Diseno = {
       clave: this.disenoForm.get('clave')?.value,
       area_unitaria: this.disenoForm.get('area_unitaria')?.value,
       tramo: this.disenoForm.get('tramo')?.value,
-      origen_km: this.disenoForm.get('origen_km')?.value,
-      destino_km: this.disenoForm.get('destino_km')?.value,
+      km_inicial_ddv: this.disenoForm.get('km_inicial_ddv')?.value,
+      km_destino_ddv: this.disenoForm.get('km_destino_ddv')?.value,
       origen_coordenadas: this.disenoForm.get('origen_coordenadas')?.value,
       destino_coordenadas: this.disenoForm.get('destino_coordenadas')?.value,
       longitud: this.disenoForm.get('longitud')?.value,

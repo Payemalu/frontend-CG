@@ -14,9 +14,9 @@ export class ListarDisenoComponent implements OnInit {
   displayedColumns = [
     'clave',
     'area_unitaria',
-    'tramo',
-    'origen_km',
-    'destino_km',
+    'nombre_tramo',
+    'km_inicial_ddv',
+    'km_destino_ddv',
     'origen_coordenadas',
     'destino_coordenadas',
     'longitud',
@@ -55,6 +55,8 @@ export class ListarDisenoComponent implements OnInit {
       (res) => {
         this.listDiseno = res;
         this.dataSource = this.listDiseno;
+        this.listDiseno[0];
+        this.listDiseno.sort();
       },
       (error) => {
         console.log(error);

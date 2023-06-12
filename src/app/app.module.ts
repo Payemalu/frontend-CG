@@ -44,6 +44,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ConstructionFormComponent } from './pages/construction-form/construction-form.component';
+import { FrontPageComponent } from './components/front-page/front-page.component';
+
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -60,7 +64,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FormularyComponent,
     ProfileEditorComponent,
     DesignFormComponent,
-    ListarDisenoComponent
+    ListarDisenoComponent,
+    ConstructionFormComponent,
+    FrontPageComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +95,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 
     MatFormFieldModule,
     MatNativeDateModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
+    MatCardModule
   ],
   providers: [
     MatDatepickerModule,

@@ -1,0 +1,22 @@
+<div class="cg-form-zone">
+    <mat-card class="example-card" *ngFor="let f of lista; let i=index">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>{{ f.titulo }}</mat-card-title>
+            <mat-card-subtitle>{{ f.subtitulo }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="./../../../assets/images/{{ f.imagen }}" alt="Formulario Líquidos Penetrantes">
+        <mat-card-content>
+            <!-- <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                    bred for hunting.
+                </p> -->
+            <p>{{ f.descripcion }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Formulario No. {{ i }}</button>
+            <button mat-button routerLink="{{ f.enlace }}">Ver formulario</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

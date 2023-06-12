@@ -1,114 +1,120 @@
 <h2>Sistema Nacional de Gasoductos</h2>
 
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                DUCTO
-            </mat-panel-title>
-            <mat-panel-description>
-                Elija el nombre del Ducto
-                <mat-icon>account_circle</mat-icon>
-            </mat-panel-description>
-       
-        </mat-expansion-panel-header>
+<hr>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Nombre Ducto</mat-label>
-            <input matInput>
-        </mat-form-field>
+<form action="" [formGroup]="ductoSng">
+    <div class="flex-container">
+        <mat-accordion class="cg-headers-align">
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle >
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        DUCTO
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Elija el Ducto
+                        <mat-icon>directions</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
 
-        <mat-form-field appearance="fill">
-            <mat-label>Age</mat-label>
-            <input matInput type="number" min="1">
-        </mat-form-field>
-        <mat-action-row>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
-        </mat-action-row>
-    </mat-expansion-panel>
+                <mat-form-field appearance="fill">
+                    <mat-label>Ducto</mat-label>
+                    <mat-select
+                            (selectionChange)="selectedPipe($event)"
+                            matInput placeholder="Elija un ducto"
+                            formControlName="ducto"
+                            value="ducto"
+                    >
+                        <!-- <mat-option [value]="selected">{{selected}}</mat-option> -->
+                        <mat-option *ngFor="let duc of listaDuctos" [value]="duc.ducto">{{duc.ducto}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Tramo 1</mat-label>
+                    <input matNativeControl
+                        formControlName="tramo1"
+                        value="tramo1"
+                        readonly
+                    >
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Tramo 2</mat-label>
+                    <input matNativeControl
+                        formControlName="tramo2"
+                        value="tramo2"
+                        readonly
+                    >
+                </mat-form-field>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                CVE AU
-            </mat-panel-title>
-            <mat-panel-description>
-                Elija la Clave
-                <mat-icon>map</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Country</mat-label>
-            <input matInput>
-        </mat-form-field>
-
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">Next</button>
-        </mat-action-row>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                CVE
-            </mat-panel-title>
-            <mat-panel-description>
-                Información del Kilometraje
-                <mat-icon>date_range</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <!-- <mat-form-field appearance="fill">
-            <mat-label>Date</mat-label>
-            <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-        </mat-form-field>
-        <mat-datepicker #picker></mat-datepicker> -->
-
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">End</button>
-        </mat-action-row>
-    </mat-expansion-panel>
-
-</mat-accordion>
-
-<!-- <mat-tab-group>
-    <mat-tab label="Nombre del Ducto">
-        <div class="datos cg-padd">
-            <h3>DUCTO</h3>
-            <div *ngIf="listDucts.length >= 1">
-                    <ul *ngFor="let duct of listDucts">
-                        <li>{{ duct.DUCTO }}</li>
-                    </ul>
-            </div>
-            <h5 style="text-align: start; margin-top: 10px;" *ngIf="listDucts.length == 0">No hay productos para mostrar</h5>
-
-        </div>
-    </mat-tab>
-    <mat-tab label="Clave">
-        <div class="datos cg-padd">
-            <h3>CVE</h3>
-            <div *ngIf="listDucts.length > 0">
-                    <ul *ngFor="let duct of listDucts">
-                        <li>{{ duct.CVE }}</li>
-                    </ul>
-            </div>
-            <h5 style="text-align: start; margin-top: 10px;" *ngIf="listDucts.length == 0">No hay productos para mostrar</h5>
-
-        </div>
-    </mat-tab>
-    <mat-tab label="Área">
-        <div class="datos cg-padd">
-            <h3>AREA_UNI</h3>
-            <div *ngIf="listDucts.length > 0">
-                    <ul *ngFor="let duct of listDucts">
-                        <li>{{ duct.AREA_UNI }}</li>
-                    </ul>
-            </div>
-            <h5 style="text-align: start; margin-top: 10px;" *ngIf="listDucts.length == 0">No hay productos para mostrar</h5>
-
-        </div>
-    </mat-tab>
-</mat-tab-group> -->
+                <mat-action-row>
+                    <button mat-button color="primary" [disabled]="bloquear" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+            
+            <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        CVE AU
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Elija la Clave
+                        <mat-icon>more_horiz</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Clave - Área Unitaria</mat-label>
+                    <mat-select
+                            (selectionChange)="selectedCve($event)"
+                            matInput placeholder="Elija una clave"
+                            formControlName="cve_au"
+                            value="cve_au"
+                    >
+                        <mat-option *ngFor="let cve of listaCve" [value]="cve.cve_au">{{cve.cve_au}} - {{cve.area_unitaria}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                    <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+            
+            <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        CVE
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Información del Kilometraje
+                        <mat-icon>360</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Origen Km</mat-label>
+                    <input matNativeControl
+                        formControlName="km_inicial_ddv"
+                        value="km_inicial_ddv"
+                        readonly
+                    >
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Destino Km</mat-label>
+                    <input matNativeControl
+                        formControlName="km_destino_ddv"
+                        value="km_destino_ddv"
+                        readonly
+                    >
+                </mat-form-field>
+                
+                <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                    <button mat-button color="primary" (click)="nextStep()">Final</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</form>

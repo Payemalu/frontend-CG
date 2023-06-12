@@ -1,5 +1,10 @@
 .sidenav-container {
   height: 100%;
+  background: url(./../../../assets/images/fondo_temporal.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .sidenav {

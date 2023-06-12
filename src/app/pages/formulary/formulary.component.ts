@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -7,10 +7,11 @@ import { LiquidoPenetrante } from '../../models/liquidoPenetrante';
 import { LiquidosPenetrantesService } from 'src/app/services/liquidos-penetrantes.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AreaUnitariaI } from 'src/app/models/areaUnitariaKm';
-// import { KilometrajeI } from 'src/app/models/areaUnitariaKm';
 import { AreaUnitariaKmService } from 'src/app/services/area-unitaria-km.service';
 import { DatePipe } from '@angular/common';
+import { KilometrajeI } from 'src/app/models/areaUnitariaKm';
+import { filter } from 'rxjs/operators';
+import { MatSelectChange } from '@angular/material/select';
 
 interface Food {
   value: string;
@@ -32,29 +33,18 @@ interface Car {
 export class FormularyComponent implements OnInit {
 
   /*** Area selector ********************/
-  areaUnitariaSeleccionada: AreaUnitariaI = {
-    _id: 0,
-    area_unitaria: '',
-    km_inicial: '',
-    km_inicial_ddv: '',
-    km_final: '',
-    km_final_ddv: '',
-    tramo: 0,
-    nombre_tramo: '',
-    cve_au: 0,
-    cve: ''
-  };
-  // selected = '-- Seleccione --';
-  selected = 'Área Unitaria';
-  listAreaUnitaria: AreaUnitariaI[] = [];
-  // kilometraje = []
-  // kilometroInicial: KilometrajeI[] = [];
+  // public selectedKmIni: KilometrajeI = { _id: 0, kilometro_inicial: '', km_inicial_ddv: '', area_unitaria: '', km_final: '', km_final_ddv: '' };
+  kilometroInicial: KilometrajeI[] = [];
+  selected = 'Kilómetro Inicial';
+  value = '';
+  dataSourceAU = new MatTableDataSource<KilometrajeI>(this.kilometroInicial);
+  items = this.kilometroInicial;
   /*** Area selector ********************/
 
 
   liqPenForm: FormGroup;
 
-  dataSource = new MatTableDataSource<Article>();
+  dataSourceLP = new MatTableDataSource<Article>();
   selection = new SelectionModel<Article>(true, []);
 
   commentFC = new FormControl();
@@ -176,110 +166,55 @@ export class FormularyComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private liquidoPenService: LiquidosPenetrantesService,
-    private areaUniService: AreaUnitariaKmService
+    private dataService: AreaUnitariaKmService
   ) {
     this.liqPenForm = this.fb.group({
-      fechaInicio: ['', Validators.required],
-      fechaFinal: ['', Validators.required],
-      numeroReporte: ['', Validators.required],
+      fecha_inicio: ['', Validators.required],
+      fecha_final: ['', Validators.required],
+      numero_reporte: ['', Validators.required],
       sistema: ['', Validators.required],
-      presionOperacion: ['', Validators.required],
-      temperaturaOperacion: ['', Validators.required],
-      // areaUnitaria: this.fb.group({
-      //   kilometroInicial: [''],
-      //   kilometroDestino: [''],
-      // }),
-      areaUnitaria: ['', Validators.required],
-      kilometroInicial: [''],
-      kilometroDestino: [''],
-      // 
-      // descripcionObra: ['', Validators.required],
-      // nombreLineaTramo: ['', Validators.required],
-      // localizacionCoordenadas: ['', Validators.required],
-      // localizacionKilometraje: ['', Validators.required],
-      // desActividadesInspeccion: ['', Validators.required],
-      // diametro: ['', Validators.required],
-      // espesorNominal: ['', Validators.required],
-      // especificacion: ['', Validators.required],
-      // zonaInspeccionada: ['', Validators.required],
-      // tipoMaterial: ['', Validators.required],
-      // dimensiones: ['', Validators.required],
-      // descripcionPieza: ['', Validators.required],
-      // temperaturaPrueba: ['', Validators.required],
-      // acabadoSuperficial: ['', Validators.required],
-      // iluminacion: ['', Validators.required],
-      // materialAbsorbente: ['', Validators.required],
-      // codigoAplicable: ['', Validators.required],
-      // parte: ['', Validators.required],
-      // seccion: ['', Validators.required],
-      // procedimiento: ['', Validators.required],
-      // tecnicaMetodo: ['', Validators.required],
-      // aplicacion: ['', Validators.required],
-      // visible: ['', Validators.required],
-      // fluorescente: ['', Validators.required],
-      // tiempoPenetracion: ['', Validators.required],
-      // marcaPenetrante: ['', Validators.required],
-      // numLotePenetrante: ['', Validators.required],
-      // tiempoSecado: ['', Validators.required],
-      // marcaRemovedor: ['', Validators.required],
-      // numLoteRemovedor: ['', Validators.required],
-      // tiempoRevelado: ['', Validators.required],
-      // marcaRevelador: ['', Validators.required],
-      // numLoteMarca: ['', Validators.required],
-      // tipoGrupoPenetracion: ['', Validators.required],
-      // tipoPenetrante: ['', Validators.required],
-      // tipoRevelador: ['', Validators.required],
-      // referencia: ['', Validators.required],
-      // elemento: ['', Validators.required],
-      // descripcion: ['', Validators.required],
-      // identificacion: ['', Validators.required],
-      // tbl_identificacion: [''],
-      // tbl_elemento_a: [''],
-      // tbl_elemento_b: [''],
-      // tbl_evaluacion: [''],
-      // tbl_evaluacion_longitud: [''],
-      // tbl_tipo_defecto: [''],
-      // tbl_dimension_defecto: [''],
-      // tbl_observaciones: [''],
-      // tbl_resultado_dictamen: [''],
-      // resultado: ['', Validators.required],
-      // observaciones: ['', Validators.required],
-      descripcionObra: [''],
-      nombreLineaTramo: [''],
-      localizacionCoordenadas: [''],
-      localizacionKilometraje: [''],
-      desActividadesInspeccion: [''],
+      presion_operacion: ['', Validators.required],
+      temperatura_operacion: ['', Validators.required],
+      km_final: [],
+      kilometro_inicial: [''],
+      area_unitaria: [''],
+      kilometro_destino: [''],
+      descripcion_obra: [''],
+      nombre_linea_tramo: [''],
+      localizacion_coordenadas: [''],
+      localizacion_kilometraje: [''],
+      des_actividades_inspeccion: [''],
       diametro: [''],
-      espesorNominal: [''],
+      espesor_nominal: [''],
       especificacion: [''],
-      zonaInspeccionada: [''],
-      tipoMaterial: [''],
+      zona_inspeccionada: [''],
+      tipo_material: [''],
       dimensiones: [''],
-      descripcionPieza: [''],
-      temperaturaPrueba: [''],
-      acabadoSuperficial: [''],
+      descripcion_pieza: [''],
+      temperatura_prueba: [''],
+      acabado_superficial: [''],
       iluminacion: [''],
-      materialAbsorbente: [''],
-      codigoAplicable: [''],
+      material_absorbente: [''],
+      codigo_aplicable: [''],
       parte: [''],
       seccion: [''],
       procedimiento: [''],
-      tecnicaMetodo: [''],
+      tecnica_metodo: [''],
       aplicacion: [''],
       visible: [''],
       fluorescente: [''],
-      tiempoPenetracion: [''],
-      marcaPenetrante: [''],
-      numLotePenetrante: [''],
-      tiempoSecado: [''],
-      marcaRemovedor: [''],
-      numLoteRemovedor: [''],
-      tiempoRevelado: [''],
-      marcaRevelador: [''],
-      numLoteMarca: [''],
-      tipoGrupoPenetracion: [''],
-      tipoPenetrante: [''],
-      tipoRevelador: [''],
+      tiempo_penetracion: [''],
+      marca_penetrante: [''],
+      num_lote_penetrante: [''],
+      tiempo_secado: [''],
+      marca_removedor: [''],
+      num_lote_removedor: [''],
+      tiempo_revelado: [''],
+      marca_revelador: [''],
+      num_lote_marca: [''],
+      tipo_grupo_penetracion: [''],
+      tipo_penetrante: [''],
+      tipo_revelador: [''],
       referencia: [''],
       elemento: [''],
       descripcion: [''],
@@ -299,128 +234,149 @@ export class FormularyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAreasUnitarias();
-    // this.getKilometroInicial();
-    // this.traerAreasUnitarias();
-    // console.log("Listar Area Unitaria:", this.listAreaUnitaria);
-    // console.log('Áreas Unitarias: ', this.areaUniService.getAreasUnitarias());
-    // console.log('Kilometraje: ', this.areaUniService.obtenerKilometraje());
-    // this.areasUnitarias = this.areaUniService.obtenerAreasUnitarias();
+    this.getKilometroInicial();
+  }
+  
+  selectedType(trigger: MatSelectChange) {
+    this.dataSourceAU = trigger.value;
+
+    const selectedItem = this.items.find((x) => x.kilometro_inicial == trigger.value);
+    if ( selectedItem ) this.liqPenForm.controls['area_unitaria'].patchValue(selectedItem.area_unitaria);
+    if ( selectedItem ) this.liqPenForm.controls['kilometro_destino'].patchValue(selectedItem.kilometro_destino);
   }
 
-  getAreasUnitarias1() {
-    this.areaUniService.getAreasUnitarias().subscribe((res) => {
-      this.areaUniService.areasUnitarias = res;
-      console.log('Áreas Unitarias: ', this.areaUniService.areasUnitarias);
-    });
+  getKilometroInicial() {
+    this.dataService.getKilometroInicial()
+      .subscribe(
+        (res) => {
+          this.kilometroInicial = res;
+          this.items = this.kilometroInicial;
+          console.log('Items->', this.items);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    
   }
 
-  getAreasUnitarias() {
-    console.log('Obteniendo área unitaria...');
-    this.areaUniService.getAreasUnitarias()
-    .subscribe((res) => {
-      console.log('Áreas Unitarias: ', res);
-      this.listAreaUnitaria = res;
-    },
-    (error) => {
-      console.log(error);
-    });
-  }
+  // getAreasUnitarias1() {
+  //   this.dataService.getAreasUnitarias().subscribe((res) => {
+  //     this.dataService.areasUnitarias = res;
+  //     console.log('Áreas Unitarias: ', this.dataService.areasUnitarias);
+  //   });
+  // }
 
-  // getKilometroInicial() {
-  //   console.log('Obteniendo kilómetro inicial...');
-  //   this.areaUniService.getKilometroInicial()
+  // getAreasUnitarias() {
+  //   console.log('Obteniendo área unitaria...');
+  //   this.dataService.getAreasUnitarias()
   //   .subscribe((res) => {
-  //     console.log('Kilómetro inicial: ', res);
-  //     this.kilometroInicial = res;
+  //     console.log('Áreas Unitarias: ', res);
+  //     this.listAreaUnitaria = res;
   //   },
   //   (error) => {
   //     console.log(error);
   //   });
   // }
 
-  editAreaUnitaria(areaUnitaria: AreaUnitariaI) {
-    this.areaUniService.areaUnitariaSeleccionada = areaUnitaria;
-  }
+  // getKilometro_inicial() {
+  //   console.log('Obteniendo kilómetro inicial...');
+  //   this.dataService.getKilometro_inicial()
+  //   .subscribe((res) => {
+  //     console.log('Kilómetro inicial: ', res);
+  //     this.kilometro_inicial = res;
+  //   },
+  //   (error) => {
+  //     console.log(error);
+  //   });
+  // }
+
+  // editAreaUnitaria(areaUnitaria: AreaUnitariaI) {
+  //   this.dataService.areaUnitariaSeleccionada = areaUnitaria;
+  // }
 
 
   cambiarKilometraje(_id: any){
     console.log('Id->', _id);
-    // this.kilometroInicial = this.areaUniService.getKilometroInicial().filter(item => item.countryId == _id);
+    // this.kilometro_inicial = this.dataService.getKilometro_inicial().filter(item => item.countryId == _id);
   }
 
   cambioRegion(dato:any){
     //Aqui va tu logica de consulta a la BD
 
-    // this.kilometraje = this.kilometroInicial[dato]
+    // this.kilometraje = this.kilometro_inicial[dato]
   }
 
 
 
 
-  onSelect(_id: any): void {
-    console.log('Id->', _id);
-    // this.kilometroInicial = this.areaUniService.getKilometroInicial().filter(item => item.km_inicial == _id);
+  // onSelect1(_id: any): void {
+  //   console.log('Id->', _id);
+  //   this.kilometro_inicial = this.dataService.getKilometroInicial().filter(item => item.kilometro_inicial == _id);
+  // }
+  onSelect( id: any ):void {
+    console.log('Id->', id);
+    this.dataService.getKilometroInicial();
   }
 
-  compararNombres( areaUnitariaKm1:AreaUnitariaI, areaUnitariaKm2:AreaUnitariaI) {
-    if (areaUnitariaKm1==null || areaUnitariaKm2==null) {
-      return false
-    }
-    return areaUnitariaKm1.area_unitaria===areaUnitariaKm2.area_unitaria;
-  }
+  // compararNombres( areaUnitariaKm1:AreaUnitariaI, areaUnitariaKm2:AreaUnitariaI) {
+  //   if (areaUnitariaKm1==null || areaUnitariaKm2==null) {
+  //     return false
+  //   }
+  //   return areaUnitariaKm1.area_unitaria===areaUnitariaKm2.area_unitaria;
+  // }
 
   agregarLiquidoPenetrante() {
     const LIQUIDOPENETRANTE: LiquidoPenetrante = {
-      fechaInicio: this.liqPenForm.get('fechaInicio')?.value,
-      fechaFinal: this.liqPenForm.get('fechaFinal')?.value,
-      numeroReporte: this.liqPenForm.get('numeroReporte')?.value,
+      fecha_inicio: this.liqPenForm.get('fecha_inicio')?.value,
+      fecha_final: this.liqPenForm.get('fecha_final')?.value,
+      numero_reporte: this.liqPenForm.get('numero_reporte')?.value,
       sistema: this.liqPenForm.get('sistema')?.value,
-      presionOperacion: this.liqPenForm.get('presionOperacion')?.value,
-      temperaturaOperacion: this.liqPenForm.get('temperaturaOperacion')?.value,
-      areaUnitaria: this.liqPenForm.get('areaUnitaria')?.value,
-      kilometroInicial: this.liqPenForm.get('kilometroInicial')?.value,
-      kilometroDestino: this.liqPenForm.get('kilometroDestino')?.value,
+      presion_operacion: this.liqPenForm.get('presion_operacion')?.value,
+      temperatura_operacion: this.liqPenForm.get('temperatura_operacion')?.value,
+      kilometro_inicial: this.liqPenForm.get('kilometro_inicial')?.value,
+      area_unitaria: this.liqPenForm.get('area_unitaria')?.value,
+      kilometro_destino: this.liqPenForm.get('kilometro_destino')?.value,
 
-      descripcionObra: this.liqPenForm.get('descripcionObra')?.value,
-      nombreLineaTramo: this.liqPenForm.get('nombreLineaTramo')?.value,
-      localizacionCoordenadas: this.liqPenForm.get('localizacionCoordenadas')
+      descripcion_obra: this.liqPenForm.get('descripcion_obra')?.value,
+      nombre_linea_tramo: this.liqPenForm.get('nombre_linea_tramo')?.value,
+      localizacion_coordenadas: this.liqPenForm.get('localizacion_coordenadas')
         ?.value,
-      localizacionKilometraje: this.liqPenForm.get('localizacionKilometraje')
+      localizacion_kilometraje: this.liqPenForm.get('localizacion_kilometraje')
         ?.value,
-      desActividadesInspeccion: this.liqPenForm.get('desActividadesInspeccion')
+      des_actividades_inspeccion: this.liqPenForm.get('des_actividades_inspeccion')
         ?.value,
       diametro: this.liqPenForm.get('diametro')?.value,
-      espesorNominal: this.liqPenForm.get('espesorNominal')?.value,
+      espesor_nominal: this.liqPenForm.get('espesor_nominal')?.value,
       especificacion: this.liqPenForm.get('especificacion')?.value,
-      zonaInspeccionada: this.liqPenForm.get('zonaInspeccionada')?.value,
-      tipoMaterial: this.liqPenForm.get('tipoMaterial')?.value,
+      zona_inspeccionada: this.liqPenForm.get('zona_inspeccionada')?.value,
+      tipo_material: this.liqPenForm.get('tipo_material')?.value,
       dimensiones: this.liqPenForm.get('dimensiones')?.value,
-      descripcionPieza: this.liqPenForm.get('descripcionPieza')?.value,
-      temperaturaPrueba: this.liqPenForm.get('temperaturaPrueba')?.value,
-      acabadoSuperficial: this.liqPenForm.get('acabadoSuperficial')?.value,
+      descripcion_pieza: this.liqPenForm.get('descripcion_pieza')?.value,
+      temperatura_prueba: this.liqPenForm.get('temperatura_prueba')?.value,
+      acabado_superficial: this.liqPenForm.get('acabado_superficial')?.value,
       iluminacion: this.liqPenForm.get('iluminacion')?.value,
-      materialAbsorbente: this.liqPenForm.get('materialAbsorbente')?.value,
-      codigoAplicable: this.liqPenForm.get('codigoAplicable')?.value,
+      material_absorbente: this.liqPenForm.get('material_absorbente')?.value,
+      codigo_aplicable: this.liqPenForm.get('codigo_aplicable')?.value,
       parte: this.liqPenForm.get('parte')?.value,
       seccion: this.liqPenForm.get('seccion')?.value,
       procedimiento: this.liqPenForm.get('procedimiento')?.value,
-      tecnicaMetodo: this.liqPenForm.get('tecnicaMetodo')?.value,
+      tecnica_metodo: this.liqPenForm.get('tecnica_metodo')?.value,
       aplicacion: this.liqPenForm.get('aplicacion')?.value,
       visible: this.liqPenForm.get('visible')?.value,
       fluorescente: this.liqPenForm.get('fluorescente')?.value,
-      tiempoPenetracion: this.liqPenForm.get('tiempoPenetracion')?.value,
-      marcaPenetrante: this.liqPenForm.get('marcaPenetrante')?.value,
-      numLotePenetrante: this.liqPenForm.get('numLotePenetrante')?.value,
-      tiempoSecado: this.liqPenForm.get('tiempoSecado')?.value,
-      marcaRemovedor: this.liqPenForm.get('marcaRemovedor')?.value,
-      numLoteRemovedor: this.liqPenForm.get('numLoteRemovedor')?.value,
-      tiempoRevelado: this.liqPenForm.get('tiempoRevelado')?.value,
-      marcaRevelador: this.liqPenForm.get('marcaRevelador')?.value,
-      numLoteMarca: this.liqPenForm.get('numLoteMarca')?.value,
-      tipoGrupoPenetracion: this.liqPenForm.get('tipoGrupoPenetracion')?.value,
-      tipoPenetrante: this.liqPenForm.get('tipoPenetrante')?.value,
-      tipoRevelador: this.liqPenForm.get('tipoRevelador')?.value,
+      tiempo_penetracion: this.liqPenForm.get('tiempo_penetracion')?.value,
+      marca_penetrante: this.liqPenForm.get('marca_penetrante')?.value,
+      num_lote_penetrante: this.liqPenForm.get('num_lote_penetrante')?.value,
+      tiempo_secado: this.liqPenForm.get('tiempo_secado')?.value,
+      marca_removedor: this.liqPenForm.get('marca_removedor')?.value,
+      num_lote_removedor: this.liqPenForm.get('num_lote_removedor')?.value,
+      tiempo_revelado: this.liqPenForm.get('tiempo_revelado')?.value,
+      marca_revelador: this.liqPenForm.get('marca_revelador')?.value,
+      num_lote_marca: this.liqPenForm.get('num_lote_marca')?.value,
+      tipo_grupo_penetracion: this.liqPenForm.get('tipo_grupo_penetracion')?.value,
+      tipo_penetrante: this.liqPenForm.get('tipo_penetrante')?.value,
+      tipo_revelador: this.liqPenForm.get('tipo_revelador')?.value,
       referencia: this.liqPenForm.get('referencia')?.value,
       elemento: this.liqPenForm.get('elemento')?.value,
       descripcion: this.liqPenForm.get('descripcion')?.value,
@@ -457,19 +413,19 @@ export class FormularyComponent implements OnInit {
       );
   }
 
-  traerAreasUnitarias() {
-    // console.log('Trayendo Áreas Unitarias...');
-    this.areaUniService.obtenerAreasUnitariasKm()
-    .subscribe(
-      (dataAU) => {
-        // console.log(dataAU);
-        this.listAreaUnitaria = dataAU;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
+  // traerAreasUnitarias() {
+  //   // console.log('Trayendo Áreas Unitarias...');
+  //   this.dataService.obtenerAreasUnitariasKm()
+  //   .subscribe(
+  //     (dataAU) => {
+  //       // console.log(dataAU);
+  //       this.listAreaUnitaria = dataAU;
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   getFloatLabelValue(): FloatLabelType {
     return this.floatLabelControl.value || 'auto';
@@ -491,7 +447,7 @@ export class FormularyComponent implements OnInit {
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSourceLP.data.length;
     return numSelected === numRows;
   }
 
@@ -501,7 +457,7 @@ export class FormularyComponent implements OnInit {
       this.selection.clear();
       return;
     }
-    this.selection.select(...this.dataSource.data);
+    // this.selection.select(...this.dataSource.data);
   }
 
   /** The label for the checkbox on the passed row */
@@ -520,7 +476,7 @@ export class FormularyComponent implements OnInit {
 
   agregarOpciones(form:any) {
     const selec = form.areaUnitaria.options;
-    const combo = form.kilometroInicial.options;
+    const combo = form.kilometro_inicial.options;
     combo.length = null;
 
     if (selec[0].selected == true) {
@@ -543,3 +499,5 @@ export class Article {
     public select: boolean
   ) {}
 }
+
+// const ELEMENT_DATA: Element[] = [{ name: 'Arnold', item: 'Laptop', item2: 'Audífonos' }];

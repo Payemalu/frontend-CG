@@ -1,4 +1,4 @@
-<h2>Diseño y Construcción</h2>
+<h2>Identificación, Diseño</h2>
 <hr>
 
 <!-- Start Form -->
@@ -7,55 +7,75 @@
     <!-- Start Container -->
     <div class="flex-container">
 
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-form-field appearance="fill" class="flex-items">
             <mat-label>Clave</mat-label>
-            <input
-                formControlName="clave"
-                matInput placeholder="Anote la clave"
+            <mat-select
+                    (selectionChange)="selectedType($event)"
+                    matInput placeholder="Seleccione una clave"
+                    formControlName="clave"
+                    value="clave"
             >
+                <!-- <mat-option [value]="selected">{{selected}}</mat-option> -->
+                <mat-option *ngFor="let item of items" [value]="item.clave">{{item.clave}}</mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="disenoForm.get('clave')?.hasError('required') && disenoForm.get('clave')?.touched">
+                <span>La clave <strong>es obligatoria</strong></span>
+            </mat-error> 
         </mat-form-field>
 
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+        <mat-form-field appearance="fill" class="flex-items">
             <mat-label>Área Unitaria</mat-label>
-            <input
-                formControlName="area_unitaria"
-                matInput placeholder="Escriba el área unitaria"
+            <mat-select
+                    (selectionChange)="selectedType($event)"
+                    matInput placeholder="Seleccione el área unitaria"
+                    formControlName="area_unitaria"
+                    value="area_unitaria"
             >
+                <mat-option *ngFor="let item of items" [value]="item.area_unitaria">{{item.area_unitaria}}</mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="disenoForm.get('area_unitaria')?.hasError('required') && disenoForm.get('area_unitaria')?.touched">
+                <span>El área unitaria <strong>es obligatoria</strong></span>
+            </mat-error> 
         </mat-form-field>
 
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Tramo</mat-label>
-            <input
-                formControlName="tramo"
-                matInput placeholder="Escriba el nombre del tramo"
-            >
-            <mat-error *ngIf="disenoForm.get('tramo')?.hasError('required') && disenoForm.get('tramo')?.touched">
-                <span>El tramo <strong>es obligatorio</strong></span>
-            </mat-error>
-        </mat-form-field>
-        
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Origen Km</mat-label>
-            <input
-                formControlName="origen_km"
-                matInput placeholder="Ingrese el Kilómetro origen"
+            <input matNativeControl 
+                formControlName="km_inicial_ddv"
+                matInput placeholder=""
+                value="km_inicial_ddv"
+                readonly
             >
-            <mat-error *ngIf="disenoForm.get('origen_km')?.hasError('required') && disenoForm.get('origen_km')?.touched">
-                <span>El kilometraje de origen <strong>es obligatorio</strong></span>
-            </mat-error>
         </mat-form-field>
-        
+
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Destino Km</mat-label>
             <input
-                formControlName="destino_km"
-                matInput placeholder="Ingrese el Kilómetro destino"
+                formControlName="km_destino_ddv"
+                matInput placeholder=""
+                value="km_destino_ddv"
+                readonly
             >
-            <mat-error *ngIf="disenoForm.get('destino_km')?.hasError('required') && disenoForm.get('destino_km')?.touched">
-                <span>El kilometraje de destino <strong>es obligatorio</strong></span>
-            </mat-error>
         </mat-form-field>
-        
+
+        <mat-form-field appearance="fill" class="flex-items">
+            <mat-label>Tramo</mat-label>
+            <mat-select
+                    (selectionChange)="selectedType($event)"
+                    matInput placeholder="Seleccione un tramo"
+                    formControlName="tramo"
+                    value="tramo"
+            >
+                <mat-option *ngFor="let tramo of tramos" [value]="tramo.value">{{tramo.value}}</mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="disenoForm.get('tramo')?.hasError('required') && disenoForm.get('tramo')?.touched">
+                <span>El tramo <strong>es obligatorio</strong></span>
+            </mat-error> 
+        </mat-form-field>
+
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Origen Coordenadas</mat-label>
             <input
@@ -71,7 +91,7 @@
                 matInput placeholder="Ingrese las coordenadas de destino"
             >
         </mat-form-field>
-
+        
         <div class="flex-items">
             <h3 class="text-center">Diseño</h3>
         </div>
@@ -159,42 +179,9 @@
         </mat-form-field>
 
         <div class="flex-items">
-            <h3 class="text-center">Construcción</h3>
+            <h4>Nota: Para la etapa de construcción con el objetivo...</h4>
         </div>
 
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Fecha de Construcción</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName="fecha_construccion">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-        
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Método de Recubrimiento de Campo</mat-label>
-            <input formControlName="metodo_recubrimiento" matInput placeholder="Ingrese el método de recubrimiento" type="text" value="">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Tipo de Suelo</mat-label>
-            <input formControlName="tipo_suelo" matInput placeholder="Ingrese el tipo de suelo" type="text" value="">
-        </mat-form-field>
-        
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Material de Relleno</mat-label>
-            <input formControlName="material_relleno" matInput placeholder="Anote el material de relleno" type="text" value="">
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Protección Catódica</mat-label>
-            <input formControlName="proteccion_catodica" matInput placeholder="Ingrese protección catódica" type="text" value="">
-        </mat-form-field>
-        
-        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-            <mat-label>Tipo de Recubrimiento</mat-label>
-            <input formControlName="tipo_recubrimiento" matInput placeholder="Ingrese el tipo de recubrimiento" type="text" value="">
-        </mat-form-field>
-        
         <hr class="cg-hr">
         <section class="flex-items">
             <div class="example-button-row">
@@ -208,6 +195,7 @@
     
     </div>
     <!-- Finish Container -->
+    
 
 </form>
 <!-- Finish Form -->

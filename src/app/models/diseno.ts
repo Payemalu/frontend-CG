@@ -3,8 +3,8 @@ export class Diseno {
     clave: string;
     area_unitaria: number;
     tramo: string;
-    origen_km: string;
-    destino_km: string;
+    km_inicial_ddv: string;
+    km_destino_ddv: string;
     origen_coordenadas: string;
     destino_coordenadas: string;
     longitud: number;
@@ -30,8 +30,8 @@ export class Diseno {
         clave: string,
         area_unitaria: number,
         tramo: string,
-        origen_km: string,
-        destino_km: string,
+        km_inicial_ddv: string,
+        km_destino_ddv: string,
         origen_coordenadas: string,
         destino_coordenadas: string,
         longitud: number,
@@ -57,8 +57,8 @@ export class Diseno {
         this.clave = clave;
         this.area_unitaria = area_unitaria;
         this.tramo = tramo;
-        this.origen_km = origen_km;
-        this.destino_km = destino_km;
+        this.km_inicial_ddv = km_inicial_ddv;
+        this.km_destino_ddv = km_destino_ddv;
         this.origen_coordenadas = origen_coordenadas;
         this.destino_coordenadas = destino_coordenadas;
         this.longitud = longitud;

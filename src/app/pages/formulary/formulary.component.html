@@ -12,12 +12,12 @@
             <mat-date-range-input [rangePicker]="picker">
                 <input
                     matStartDate
-                    formControlName="fechaInicio"
+                    formControlName="fecha_inicio"
                     matInput placeholder="Fecha de inicio"
                 >
                 <input
                     matEndDate
-                    formControlName="fechaFinal"
+                    formControlName="fecha_final"
                     matInput placeholder="Fecha final"
                 >
             </mat-date-range-input>
@@ -25,11 +25,11 @@
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
             
-            <mat-error *ngIf="liqPenForm.get('fechaFinal')?.hasError('required') && liqPenForm.get('fechaFinal')?.touched">
+            <mat-error *ngIf="liqPenForm.get('fecha_final')?.hasError('required') && liqPenForm.get('fecha_final')?.touched">
                 <span>La fecha <strong>es obligatoria</strong></span>
             </mat-error>
-            <mat-error *ngIf="liqPenForm.get('fechaInicio')?.hasError('matStartDateInvalid')">Fecha de inicio no válida</mat-error>
-            <mat-error *ngIf="liqPenForm.get('fechaFinal')?.hasError('matEndDateInvalid')">Fecha de finalización no válida</mat-error>
+            <mat-error *ngIf="liqPenForm.get('fecha_inicio')?.hasError('matStartDateInvalid')">Fecha de inicio no válida</mat-error>
+            <mat-error *ngIf="liqPenForm.get('fecha_final')?.hasError('matEndDateInvalid')">Fecha de finalización no válida</mat-error>
         </mat-form-field>
         <!-- <p>Selected range: {{range.value | json}}</p> -->
         
@@ -37,10 +37,10 @@
             <mat-label>Número de Reporte</mat-label>
             <input
                 type="text"
-                formControlName="numeroReporte"
+                formControlName="numero_reporte"
                 matInput placeholder="Ingrese el número de reporte"
             >
-            <mat-error *ngIf="liqPenForm.get('numeroReporte')?.hasError('required') && liqPenForm.get('numeroReporte')?.touched">
+            <mat-error *ngIf="liqPenForm.get('numero_reporte')?.hasError('required') && liqPenForm.get('numero_reporte')?.touched">
                 <span>El número de reporte <strong>es obligatorio</strong></span>
             </mat-error>
         </mat-form-field>
@@ -55,69 +55,107 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Presión de Operación</mat-label>
-            <input formControlName="presionOperacion" matInput placeholder="Ingrese presión de operación">
-            <mat-error *ngIf="liqPenForm.get('presionOperacion')?.hasError('required') && liqPenForm.get('presionOperacion')?.touched">
+            <input formControlName="presion_operacion" matInput placeholder="Ingrese presión de operación">
+            <mat-error *ngIf="liqPenForm.get('presion_operacion')?.hasError('required') && liqPenForm.get('presion_operacion')?.touched">
                 <span>El campo presión de operación <strong>es obligatorio</strong></span>
             </mat-error>
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Temperatura de Operación</mat-label>
-            <input formControlName="temperaturaOperacion" matInput placeholder="Ingrese temperatura de operación">
-            <mat-error *ngIf="liqPenForm.get('temperaturaOperacion')?.hasError('required') && liqPenForm.get('temperaturaOperacion')?.touched">
+            <input formControlName="temperatura_operacion" matInput placeholder="Ingrese temperatura de operación">
+            <mat-error *ngIf="liqPenForm.get('temperatura_operacion')?.hasError('required') && liqPenForm.get('temperatura_operacion')?.touched">
                 <span>El campo temperatura de operación <strong>es obligatorio</strong></span>
             </mat-error>
         </mat-form-field>
+
+        <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Kilómetro Inicial</mat-label>
+            <input formControlName="kilometro_inicial" matInput placeholder="Ingrese el Kilómetro inicial" type="text" value="{{areaUnitariaSeleccionada}}">
+        </mat-form-field> -->
+
+
+
+        <!-- <mat-form-field appearance="fill" class="flex-items">
+            <mat-label>Kilómetro Inicial</mat-label>
+            <mat-select [(value)]="selectedKmIni._id || selectedKmIni.area_unitaria || selectedKmIni.km_final || selectedKmIni.km_final_ddv"
+                        formControlName="kilometro_inicial"
+                        [compareWith]="compararNombres"
+                        change="onSelected()">
+                <mat-option [value]="selected">{{selected}}</mat-option>
+                <mat-option *ngFor="let kmInicial of kilometroInicial" value="{{selectedKmIni._id}} - {{kmInicial.kilometro_inicial}} - {{kmInicial.km_inicial_ddv}}">{{kmInicial.kilometro_inicial}} - {{kmInicial.km_inicial_ddv}}</mat-option>
+            </mat-select>
+            {{selectedKmIni.area_unitaria}}
+        </mat-form-field> -->
+
+        <mat-form-field appearance="fill" class="flex-items">
+            <mat-label>Kilómetro Inicial</mat-label>
+            <mat-select
+                (selectionChange)="selectedType($event)"
+                formControlName="kilometro_inicial"
+                style="width:200px"
+            >
+                <!-- <mat-option></mat-option> -->
+                <mat-option *ngFor="let item of items" [value]="item.kilometro_inicial">
+                    {{ item.kilometro_inicial }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+
+        <!-- {{ selectedKmIni | json }} -->
+
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Área Unitaria</mat-label>
+            <!-- <input type="" formControlName="item" matInput placeholder="" value="item"> -->
+            <input type="" formControlName="area_unitaria" matInput placeholder="" value="area_unitaria">
+            <!-- <input *ngIf="!selectedKmIni.area_unitaria" formControlName="kilometro_inicial" matInput placeholder="Ingrese el Kilómetro inicial" id="area_unitaria" type="text" value="{{ 'selectedKmIni.value' }}"> -->
+        </mat-form-field>
+
+
+
         
-        <!-- <section formGroupName="areaUnitaria"> -->
+        <!-- <section formGroupName="area_unitaria"> -->
             <!-- <mat-form-field appearance="fill" class="flex-items">
                 <mat-label>Área Unitaria</mat-label>
-                <mat-select [(value)]="areaUnitariaSeleccionada._id"
-                            formControlName="areaUnitaria"
+                <mat-select [(value)]="area_unitariaSeleccionada._id"
+                            formControlName="area_unitaria"
                             [compareWith]="compararNombres"
                             onChange="agregarOpciones(this.form.value)"
                 >
                     <mat-option [value]="selected">{{selected}}</mat-option>
-                    <mat-option *ngFor="let areaUnitaria of listAreaUnitaria" [value]="areaUnitaria.area_unitaria">{{areaUnitaria.area_unitaria}}</mat-option>
+                    <mat-option *ngFor="let area_unitaria of listArea_unitaria" [value]="area_unitaria.area_unitaria">{{area_unitaria.area_unitaria}}</mat-option>
                 </mat-select>
             </mat-form-field> -->
-            <mat-form-field appearance="fill" class="flex-items">
+            <!-- <mat-form-field appearance="fill" class="flex-items">
                 <mat-label>Área Unitaria</mat-label>
-                <mat-select formControlName="areaUnitaria"
-                            [(value)]="areaUnitariaSeleccionada"
+                <mat-select formControlName="area_unitaria"
+                            [(value)]="area_unitariaSeleccionada"
                             [compareWith]="compararNombres"
                             onChange="cambioRegion($event.target.value)"
                 >
                     <mat-option [value]="selected">{{selected}}</mat-option>
-                    <mat-option *ngFor="let areaUnit of listAreaUnitaria" [value]="areaUnit.km_inicial">{{areaUnit.area_unitaria}}</mat-option>
+                    <mat-option *ngFor="let areaUnit of listArea_unitaria" [value]="areaUnit.kilometro_inicial">{{areaUnit.area_unitaria}}</mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
             <!-- 1-6 -->
             <!-- {{ areasUnitarias | json }} -->
             
-            <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-                <mat-label>Kilómetro Inicial</mat-label>
-                <input formControlName="kilometroInicial" matInput placeholder="Ingrese el Kilómetro inicial" type="text" value="{{areaUnitariaSeleccionada}}">
-            </mat-form-field>
-            <!-- <mat-form-field appearance="fill" class="flex-items">
-                <mat-label>Kilómetro Inicial</mat-label>
-                <mat-select [(value)]="selected" formControlName="kilometroInicial" [compareWith]="compararNombres" onChange="agregarOpciones(this.form)">
-                    <mat-option [value]="selected">{{selected}}</mat-option>
-                    <mat-option *ngFor="let kmInicial of kilometroInicial" value="{{kmInicial._id}}">{{kmInicial.km_inicial}}</mat-option>
-                </mat-select>
-            </mat-form-field> -->
             
-            <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
-                <mat-label>Kilómetro Destino</mat-label>
-                <input formControlName="kilometroDestino" matInput placeholder="Ingrese el Kilómetro de destino" type="text" value="{{areaUnitariaSeleccionada}}">
-            </mat-form-field>
+            
+        <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
+            <mat-label>Kilómetro Destino</mat-label>
+            <input type="" formControlName="kilometro_destino" matInput placeholder="" value="kilometro_destino">
+            <!-- <input *ngIf="!selectedKmIni.km_final" formControlName="kilometro_destino" matInput placeholder="Ingrese el Kilómetro de destino" type="text" value="{{ selectedKmIni }}"> -->
+        </mat-form-field>
         <!-- </section> -->
         <!-- 7-8 -->
 
         <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()"  class="flex-items">
             <mat-label>Descripción de la Obra</mat-label>
             <textarea
-                formControlName="descripcionObra"
+                formControlName="descripcion_obra"
                 matInput placeholder="Escriba una descripción"
                 [formControl]="commentFC"
                 (change)="onCommentChange()">
@@ -127,7 +165,7 @@
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()"  class="flex-items">
             <mat-label>Descripción de la Obra</mat-label>
             <textarea
-                formControlName="descripcionObra"
+                formControlName="descripcion_obra"
                 matInput placeholder="Escriba una descripción"
             >
             </textarea>
@@ -135,25 +173,25 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Nombre de la Línea o Tramo</mat-label>
-            <input formControlName="nombreLineaTramo" matInput placeholder="Escriba el nombre de la línea o el tramo">
+            <input formControlName="nombre_linea_tramo" matInput placeholder="Escriba el nombre de la línea o el tramo">
         </mat-form-field>
         <!-- 9-10 -->
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Localización (coordenadas)</mat-label>
-            <input formControlName="localizacionCoordenadas" matInput placeholder="Ingrese localización">
+            <input formControlName="localizacion_coordenadas" matInput placeholder="Ingrese localización">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Localización (KM)</mat-label>
-            <input formControlName="localizacionKilometraje" matInput placeholder="Ingrese ubicación">
+            <input formControlName="localizacion_kilometraje" matInput placeholder="Ingrese ubicación">
         </mat-form-field>
         <!-- 11-12 -->
 
         <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Descripción de Actividades o Tipo de Inspección</mat-label>
             <textarea
-                formControlName="desActividadesInspeccion"
+                formControlName="des_actividades_inspeccion"
                 matInput placeholder="Describa una actividad o anote un tipo de inspección"
                 [formControl]="commentDA"
                 (change)="onCommentChangeDa()">
@@ -162,7 +200,7 @@
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Descripción de Actividades o Tipo de Inspección</mat-label>
             <textarea
-                formControlName="desActividadesInspeccion"
+                formControlName="des_actividades_inspeccion"
                 matInput placeholder="Describa una actividad o anote un tipo de inspección"
             >
             </textarea>
@@ -181,7 +219,7 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Espesor Nominal</mat-label>
-            <input formControlName="espesorNominal" matInput placeholder="Ingrese el espesor">
+            <input formControlName="espesor_nominal" matInput placeholder="Ingrese el espesor">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
@@ -191,12 +229,12 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Zona Inspeccionada</mat-label>
-            <input formControlName="zonaInspeccionada" matInput placeholder="Ingrese la zona inspeccionada">
+            <input formControlName="zona_inspeccionada" matInput placeholder="Ingrese la zona inspeccionada">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tipo de Material</mat-label>
-            <input formControlName="tipoMaterial" matInput placeholder="Ingrese el tipo de material">
+            <input formControlName="tipo_material" matInput placeholder="Ingrese el tipo de material">
         </mat-form-field>
 
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
@@ -208,7 +246,7 @@
         <!-- <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Descripción de la Pieza</mat-label>
             <textarea
-                formControlName="descripcionPieza"
+                formControlName="descripcion_pieza"
                 matInput placeholder="Describa las características de la pieza"
                 [formControl]="commentDP"
                 (change)="onCommentChangeDP()">
@@ -217,7 +255,7 @@
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Descripción de la Pieza</mat-label>
             <textarea
-                formControlName="descripcionPieza"
+                formControlName="descripcion_pieza"
                 matInput placeholder="Describa las características de la pieza"
             >
             </textarea>
@@ -231,12 +269,12 @@
 
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Temperatura de la Prueba</mat-label>
-            <input formControlName="temperaturaPrueba" matInput placeholder="Ingrese la temperatura">
+            <input formControlName="temperatura_prueba" matInput placeholder="Ingrese la temperatura">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Acabado Superficial o Condiciones de la Superficie</mat-label>
-            <input formControlName="acabadoSuperficial" matInput placeholder="Ingrese el acabado superficial">
+            <input formControlName="acabado_superficial" matInput placeholder="Ingrese el acabado superficial">
         </mat-form-field>
         <!-- 23-24 -->
         
@@ -247,12 +285,12 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Material Absorbente</mat-label>
-            <input formControlName="materialAbsorbente" matInput placeholder="Ingrese material absorbente">
+            <input formControlName="material_absorbente" matInput placeholder="Ingrese material absorbente">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Código Aplicable</mat-label>
-            <input formControlName="codigoAplicable" matInput placeholder="Ingrese el código">
+            <input formControlName="codigo_aplicable" matInput placeholder="Ingrese el código">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
@@ -273,7 +311,7 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Técnica o Método de Aplicación</mat-label>
-            <input formControlName="tecnicaMetodo" matInput placeholder="Escriba la técnica o el método de aplicación">
+            <input formControlName="tecnica_metodo" matInput placeholder="Escriba la técnica o el método de aplicación">
         </mat-form-field>
         <!-- 31 -->
         
@@ -292,62 +330,62 @@
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tiempo de Penetración</mat-label>
-            <input formControlName="tiempoPenetracion" matInput placeholder="Escriba el tiempo de penetración">
+            <input formControlName="tiempo_penetracion" matInput placeholder="Escriba el tiempo de penetración">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Marca Penetrante</mat-label>
-            <input formControlName="marcaPenetrante" matInput placeholder="Escriba la marca penetrante">
+            <input formControlName="marca_penetrante" matInput placeholder="Escriba la marca penetrante">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>No. Lote Penetrante</mat-label>
-            <input formControlName="numLotePenetrante" matInput placeholder="Ingrese el número de lote">
+            <input formControlName="num_lote_penetrante" matInput placeholder="Ingrese el número de lote">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tiempo de Secado</mat-label>
-            <input formControlName="tiempoSecado" matInput placeholder="Escriba el tiempo de secado">
+            <input formControlName="tiempo_secado" matInput placeholder="Escriba el tiempo de secado">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Marca Removedor</mat-label>
-            <input formControlName="marcaRemovedor" matInput placeholder="Escriba la marca del removedor">
+            <input formControlName="marca_removedor" matInput placeholder="Escriba la marca del removedor">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>No. Lote Removedor</mat-label>
-            <input formControlName="numLoteRemovedor" matInput placeholder="Ingrese el número de lote">
+            <input formControlName="num_lote_removedor" matInput placeholder="Ingrese el número de lote">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tiempo de Revelado</mat-label>
-            <input formControlName="tiempoRevelado" matInput placeholder="Ingrese el tiempo de revelado">
+            <input formControlName="tiempo_revelado" matInput placeholder="Ingrese el tiempo de revelado">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Marca Revelador</mat-label>
-            <input formControlName="marcaRevelador" matInput placeholder="Escriba la marca del revelador">
+            <input formControlName="marca_revelador" matInput placeholder="Escriba la marca del revelador">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>No. Lote Marca</mat-label>
-            <input formControlName="numLoteMarca" matInput placeholder="Ingrese el número de lote">
+            <input formControlName="num_lote_marca" matInput placeholder="Ingrese el número de lote">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tipo / Grupo o Técnica de Penetración</mat-label>
-            <input formControlName="tipoGrupoPenetracion" matInput placeholder="Ingrese el tiempo de revelado">
+            <input formControlName="tipo_grupo_penetracion" matInput placeholder="Ingrese el tiempo de revelado">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tipo de Penetrante</mat-label>
-            <input formControlName="tipoPenetrante" matInput placeholder="Escriba la marca del revelador">
+            <input formControlName="tipo_penetrante" matInput placeholder="Escriba la marca del revelador">
         </mat-form-field>
         
         <mat-form-field appearance="fill" [floatLabel]="getFloatLabelValue()" class="flex-items">
             <mat-label>Tipo de Revelador</mat-label>
-            <input formControlName="tipoRevelador" matInput placeholder="Ingrese el número de lote">
+            <input formControlName="tipo_revelador" matInput placeholder="Ingrese el número de lote">
         </mat-form-field>
         <!-- 32-46 -->
         
